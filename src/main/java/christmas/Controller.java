@@ -33,24 +33,20 @@ public class Controller {
 
     public void transform(List<String> menus) {
         for (int i = 0; i < menus.size(); i += 2) {
-            hasMenu(menus.get(i));
-            menuBoard.put(menuDuplicateValidation(menus.get(i)), menuCountValidation(menus.get(i + 1)));
+            menuBoard.put(menuValidation(menus.get(i)), menuCountValidation(menus.get(i + 1)));
         }
     }
 
-    public String menuDuplicateValidation(String menu) {
+    public String menuValidation(String menu) {
         if (menuBoard.containsKey(menu)) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
-        return menu;
-    }
-
-    public void hasMenu(String menu) {
         for (ChristmasMenu christmasMenu : ChristmasMenu.values()) {
-            if (!christmasMenu.getName().contains(menu)) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            if (christmasMenu.getName().equals(menu)) {
+                return menu;
             }
         }
+        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
     public int menuCountValidation(String number) {

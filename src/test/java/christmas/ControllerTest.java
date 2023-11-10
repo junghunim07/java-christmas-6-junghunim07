@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class ControllerTest {
@@ -40,6 +41,14 @@ class ControllerTest {
     @DisplayName("메뉴에 없는 메뉴를 입력했을 때 예외 테스트")
     @Test
     void menuNotHasException() {
-        assertThatThrownBy(() -> controller.hasMenu("딸기케이크")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> controller.transform(List.of("해산물파스타", "2","초코케이크", "1", "딸기케이크", "1")))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("올바른 메뉴를 입력햇을 때 테스트")
+    @Test
+    void correctMenuTest() {
+        String expectedResult = "해산물파스타";
+        assertThat(controller.menuValidation("해산물파스타")).isEqualTo(expectedResult);
     }
 }
