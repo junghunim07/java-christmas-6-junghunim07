@@ -36,4 +36,10 @@ class ControllerTest {
         assertThatThrownBy(() -> controller.transform(List.of("해산물파스타", "2","초코케이크", "1", "해산물파스타", "1")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("메뉴에 없는 메뉴를 입력했을 때 예외 테스트")
+    @Test
+    void menuNotHasException() {
+        assertThatThrownBy(() -> controller.hasMenu("딸기케이크")).isInstanceOf(IllegalArgumentException.class);
+    }
 }
