@@ -29,4 +29,11 @@ class ControllerTest {
         assertThatThrownBy(() -> controller.transform(List.of("해산물파스타", "2","초코케이크", "1", "레드와인", "a")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("메뉴 중복 입력 예외 테스트")
+    @Test
+    void menuDuplicateException() {
+        assertThatThrownBy(() -> controller.transform(List.of("해산물파스타", "2","초코케이크", "1", "해산물파스타", "1")))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
