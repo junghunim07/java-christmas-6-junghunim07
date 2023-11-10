@@ -4,7 +4,7 @@ enum MenuCategory {
     APPETIZER, MAIN, DESSERT, BEVERAGE
 }
 
-enum ChristmasMenu {
+public enum ChristmasMenu {
     MUSHROOM_SOUP("양송이수프", 6_000, MenuCategory.APPETIZER),
     TAPAS("타파스", 5_500, MenuCategory.APPETIZER),
     CAESAR_SALAD("시저샐러드", 8_000, MenuCategory.APPETIZER),
