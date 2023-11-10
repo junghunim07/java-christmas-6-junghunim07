@@ -4,7 +4,7 @@ enum MenuCategory {
     APPETIZER, MAIN, DESSERT, BEVERAGE
 }
 
-enum MenuItem {
+enum ChristmasMenu {
     MUSHROOM_SOUP("양송이수프", 6_000, MenuCategory.APPETIZER),
     TAPAS("타파스", 5_500, MenuCategory.APPETIZER),
     CAESAR_SALAD("시저샐러드", 8_000, MenuCategory.APPETIZER),
@@ -22,7 +22,7 @@ enum MenuItem {
     private final int price;
     private final MenuCategory category;
 
-    MenuItem(String name, int price, MenuCategory category) {
+    ChristmasMenu(String name, int price, MenuCategory category) {
         this.name = name;
         this.price = price;
         this.category = category;
