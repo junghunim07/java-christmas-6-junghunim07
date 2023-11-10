@@ -21,7 +21,7 @@ public class Controller {
         output.notifyGetMenu();
         List<String> menus = input.getMenu();
         transform(menus);
-        System.out.print(menuBoard);
+        output.notifyOrderMenu(menuBoard);
     }
 
     public void inputValueValidation(int date) {
