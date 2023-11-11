@@ -20,6 +20,16 @@ public class OutputView {
         orderMenu.forEach((key, value) -> System.out.println(key + " " + value + "개"));
     }
 
+    public void notifyPayment(int totalPrice) {
+        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(totalPrice);
+    }
+    
+    public void notifyGiftMenu(String gift) {
+        System.out.println("<증정 메뉴>");
+        System.out.println(gift);
+    }
+
     public void notifyBenefit() {
         System.out.println("<혜택 내역>");
     }
@@ -30,6 +40,16 @@ public class OutputView {
 
     public void notifyNotBenefit(String event) {
         System.out.println(event);
+    }
+    
+    public void notifyAllAmountOfBenefit(int totalDiscount) {
+        System.out.println("<총혜택 금액>");
+        System.out.println("-" + totalDiscount + "원");
+    }
+
+    public void notifyAmountOfPayment(int payment) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(payment + "원");
     }
 
     public void notifyBadge(String badgeName) {

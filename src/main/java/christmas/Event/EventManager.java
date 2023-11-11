@@ -2,15 +2,19 @@ package christmas.Event;
 
 import christmas.Controller;
 import christmas.domain.Calculator;
+import christmas.domain.MenuChecker;
+import christmas.domain.MenuMachine;
 import java.util.HashMap;
 
 public class EventManager {
     public static HashMap<String, Integer> eventTable;
     Calculator calculator;
+    MenuChecker menuChecker;
 
     public EventManager() {
         eventTable = new HashMap<>();
         calculator = new Calculator();
+        menuChecker = new MenuChecker();
     }
 
     public void getMakeEventTable() {
@@ -28,19 +32,27 @@ public class EventManager {
     }
 
     private void checkWeekdayEvent() {
+        int discount = 0;
         if (WeekdaySaleEvent.checkWeekdayEvent(calculator, Controller.date)) {
-            eventTable.put(WeekdaySaleEvent.EVENT_NAME, WeekdaySaleEvent.weekdayEventDiscount(calculator, Controller.date));
+            for (String key : MenuMachine.menuBoard.keySet()) {
+                discount += WeekdaySaleEvent.weekdayEventDiscount(calculator, menuChecker.getDessertCount(key));
+            }
+            eventTable.put(WeekdaySaleEvent.EVENT_NAME, discount);
         }
-        if (WeekdaySaleEvent.weekdayEventDiscount(calculator, Controller.date) == 0) {
+        if (discount == 0) {
             eventTable.remove(WeekdaySaleEvent.EVENT_NAME);
         }
     }
 
     private void checkWeekendEvent() {
+        int discount = 0;
         if (WeekendSaleEvent.checkWeekendEvent(calculator, Controller.date)) {
-            eventTable.put(WeekendSaleEvent.EVENT_NAME, WeekendSaleEvent.weekendEventDiscount(calculator, Controller.date));
+            for (String key : MenuMachine.menuBoard.keySet()) {
+                discount += WeekendSaleEvent.weekendEventDiscount(calculator, menuChecker.getMainCount(key));
+            }
+            eventTable.put(WeekendSaleEvent.EVENT_NAME, discount);
         }
-        if (WeekendSaleEvent.weekendEventDiscount(calculator, Controller.date) == 0) {
+        if (discount == 0) {
             eventTable.remove(WeekendSaleEvent.EVENT_NAME);
         }
     }

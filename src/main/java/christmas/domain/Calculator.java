@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.Controller;
 import java.util.HashMap;
 
 public class Calculator {
@@ -47,7 +48,7 @@ public class Calculator {
         return discount;
     }
 
-    public int calculateAmountOfPayment(int totalPrice, int totalDiscount) {
-        return totalPrice - totalDiscount;
+    public int calculateAmountOfPayment(int giftDiscount) {
+        return Controller.totalPrice - Controller.totalDiscount + giftDiscount;
     }
 }

@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.Event.EventManager;
+import christmas.Event.GiftEvent;
 import christmas.domain.Badge;
 import christmas.domain.Calculator;
 import christmas.domain.MenuMachine;
@@ -12,6 +13,7 @@ public class Controller {
     public static int date;
     public static int totalPrice;
     public static int totalDiscount;
+    int giftPrice;
     InputView input = new InputView();
     OutputView output = new OutputView();
     Calculator calculator = new Calculator();
@@ -30,11 +32,17 @@ public class Controller {
         MenuMachine.transform(menus);
         output.notifyOrderMenu(MenuMachine.menuBoard);
         totalPrice = calculator.getTotalPrice();
+        output.notifyPayment(totalPrice);
     }
 
     public void getEventDetail() {
+        checkGift();
         eventManager.getMakeEventTable();
         totalDiscount = calculator.getTotalDiscount(EventManager.eventTable);
+        output.notifyBenefit();
+        printEventDetail();
+        output.notifyAllAmountOfBenefit(totalDiscount);
+        output.notifyAmountOfPayment(calculator.calculateAmountOfPayment(giftPrice));
     }
 
     public void getBadge() {
@@ -47,6 +55,17 @@ public class Controller {
         }
         if (!EventManager.eventTable.isEmpty()) {
             output.notifyBenefitDetail(EventManager.eventTable);
+        }
+    }
+
+    private void checkGift() {
+        if (totalPrice < 120_000) {
+            giftPrice = 0;
+            output.notifyGiftMenu("없음");
+        }
+        if (totalPrice >= 120_000) {
+            giftPrice = 25_000;
+            output.notifyGiftMenu("샴페인 1개");
         }
     }
 
