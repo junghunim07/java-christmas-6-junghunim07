@@ -8,17 +8,10 @@ public class EventChecker {
     MenuChecker menuChecker = new MenuChecker();
 
     public void makeEventTable(int date) {
-        checkChristmasEvent(date);
         checkWeekendEvent(date);
         checkWeekdayEvent(date);
         checkSpecialEvent(date);
         checkGiftEvent(date);
-    }
-
-    private void checkChristmasEvent(int date) {
-        if (date >= 1 && date <= 25) {
-            eventTable.put("크리스마스 디데이 할인", christmasEventDiscount(date));
-        }
     }
 
     private void checkWeekendEvent(int date) {
@@ -46,10 +39,6 @@ public class EventChecker {
         if (totalPrice >= 120_000) {
             eventTable.put("증정 이벤트", giveGiftEventDiscount());
         }
-    }
-
-    private int christmasEventDiscount(int date) {
-        return calculator.christmasDiscount(date);
     }
 
     private int weekdayEventDiscount() {
