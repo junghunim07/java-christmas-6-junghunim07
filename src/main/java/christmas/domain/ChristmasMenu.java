@@ -39,4 +39,13 @@ public enum ChristmasMenu {
     public MenuCategory getCategory() {
         return category;
     }
+
+    public static int getPriceByName(String name) {
+        for (ChristmasMenu menu : values()) {
+            if (menu.getName().equals(name)) {
+                return menu.getPrice();
+            }
+        }
+        return -1;
+    }
 }
