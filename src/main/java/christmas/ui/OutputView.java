@@ -20,6 +20,18 @@ public class OutputView {
         orderMenu.forEach((key, value) -> System.out.println(key + " " + value + "개"));
     }
 
+    public void notifyBenefit() {
+        System.out.println("<혜택 내역>");
+    }
+
+    public void notifyBenefitDetail(HashMap<String, Integer> event) {
+        event.forEach((key, value) -> System.out.println(key + " : " + "-" + value + "원"));
+    }
+
+    public void notifyNotBenefit(String event) {
+        System.out.println(event);
+    }
+
     public void notifyBadge(String badgeName) {
         System.out.println("<12월 이벤트 배지>");
         System.out.println(badgeName);

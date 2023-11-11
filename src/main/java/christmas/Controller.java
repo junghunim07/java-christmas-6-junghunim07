@@ -6,6 +6,7 @@ import christmas.domain.EventChecker;
 import christmas.domain.MenuMachine;
 import christmas.ui.InputView;
 import christmas.ui.OutputView;
+import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
@@ -31,10 +32,22 @@ public class Controller {
 
     public void getBenefitDetail() {
         eventChecker.makeEventTable(date);
+        output.notifyBenefit();
+        hasEvent(EventChecker.eventTable);
+        int totalDiscount = calculator.getTotalDiscount(EventChecker.eventTable);
     }
 
     public void getBadge() {
         output.notifyBadge(Badge.getBadgeName(calculator.getTotalPrice()));
+    }
+
+    private void hasEvent(HashMap<String,Integer> eventTable) {
+        if (eventTable.size() > 0) {
+            output.notifyBenefitDetail(eventTable);
+        }
+        if (eventTable.size() == 0) {
+            output.notifyNotBenefit("없음");
+        }
     }
 
     public void inputValueValidation(int date) {

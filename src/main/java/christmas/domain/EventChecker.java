@@ -31,7 +31,7 @@ public class EventChecker {
     private void checkWeekdayEvent(int date) {
         int result = calculator.calculateWeekdayOrWeekend(date);
         if (!(result == 1 || result == 2)) {
-            eventTable.put("주말 할인", weekendEventDiscount());
+            eventTable.put("평일 할인", weekdayEventDiscount());
         }
     }
 
