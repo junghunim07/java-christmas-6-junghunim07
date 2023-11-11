@@ -19,4 +19,9 @@ public class OutputView {
         System.out.println("<주문 메뉴>");
         orderMenu.forEach((key, value) -> System.out.println(key + " " + value + "개"));
     }
+
+    public void notifyBadge(String badgeName) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(badgeName);
+    }
 }

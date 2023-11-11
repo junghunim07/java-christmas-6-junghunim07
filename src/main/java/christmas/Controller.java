@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.Badge;
 import christmas.domain.Calculator;
 import christmas.domain.EventChecker;
 import christmas.domain.MenuMachine;
@@ -26,6 +27,10 @@ public class Controller {
         List<String> menus = input.getMenu();
         MenuMachine.transform(menus);
         output.notifyOrderMenu(MenuMachine.menuBoard);
+    }
+
+    public void getBadge(int userBenefit) {
+        output.notifyBadge(Badge.getBadgeName(userBenefit));
     }
 
     public int getTotalDiscount() {
