@@ -25,4 +25,10 @@ public class Calculator {
     public int specialDayDiscount() {
         return 1000;
     }
+
+    public int calculateTotalOrderAmount(String menu) {
+        int count = MenuMachine.menuBoard.get(menu);
+        int price = ChristmasMenu.getPriceByName(menu);
+        return count * price;
+    }
 }

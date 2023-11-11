@@ -51,4 +51,16 @@ public class EventChecker {
             discount = calculator.specialDayDiscount();
         }
     }
+
+    public int giveGiftEvent() {
+        int totalPrice = 0;
+        int discount = 0;
+        for (String key : MenuMachine.menuBoard.keySet()) {
+            totalPrice += calculator.calculateTotalOrderAmount(key);
+        }
+        if (totalPrice >= 120_000) {
+            discount = ChristmasMenu.valueOf("CHAMPAGNE").getPrice();
+        }
+        return discount;
+    }
 }
