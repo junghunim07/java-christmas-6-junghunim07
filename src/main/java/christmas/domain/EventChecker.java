@@ -27,6 +27,13 @@ public class EventChecker {
         return false;
     }
 
+    public boolean checkGiftEvent(int totalPrice) {
+        if (totalPrice >= 120_000) {
+            return true;
+        }
+        return false;
+    }
+
     public int christmasEvent(int date) {
         return calculator.christmasDiscount(date);
     }
@@ -52,14 +59,6 @@ public class EventChecker {
     }
 
     public int giveGiftEvent() {
-        int totalPrice = 0;
-        int discount = 0;
-        for (String key : MenuMachine.menuBoard.keySet()) {
-            totalPrice += calculator.calculateTotalOrderAmount(key);
-        }
-        if (totalPrice >= 120_000) {
-            discount = ChristmasMenu.valueOf("CHAMPAGNE").getPrice();
-        }
-        return discount;
+        return ChristmasMenu.valueOf("CHAMPAGNE").getPrice();
     }
 }
