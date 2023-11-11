@@ -27,6 +27,10 @@ public class EventChecker {
         return false;
     }
 
+    public int christmasEvent(int date) {
+        return calculator.christmasDiscount(date);
+    }
+
     public int weekdayEvent(int date) {
         int discount = 0;
         for (String key : MenuMachine.menuBoard.keySet()) {
