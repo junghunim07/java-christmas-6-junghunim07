@@ -13,4 +13,8 @@ public class Calculator {
     public int calculateWeekdayOrWeekend(int date) {
         return date % 7;
     }
+
+    public int weekdayAndWeekendDiscount(int count) {
+        return 2023 * count;
+    }
 }
