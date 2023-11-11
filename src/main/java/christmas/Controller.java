@@ -8,7 +8,6 @@ import java.util.List;
 public class Controller {
     InputView input = new InputView();
     OutputView output = new OutputView();
-    MenuMachine menuMachine = new MenuMachine();
 
     public void christmasPlannerStart() {
         output.notifyExplanation();
@@ -20,8 +19,8 @@ public class Controller {
     public void getMenuStart() {
         output.notifyGetMenu();
         List<String> menus = input.getMenu();
-        menuMachine.transform(menus);
-        output.notifyOrderMenu(menuMachine.menuBoard);
+        MenuMachine.transform(menus);
+        output.notifyOrderMenu(MenuMachine.menuBoard);
     }
 
     public void inputValueValidation(int date) {
