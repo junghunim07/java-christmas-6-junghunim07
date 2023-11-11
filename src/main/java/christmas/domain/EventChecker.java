@@ -29,20 +29,16 @@ public class EventChecker {
 
     public int weekdayEvent(int date) {
         int discount = 0;
-        if (!checkWeekdayOrWeekend(date)) {
-            for (String key : MenuMachine.menuBoard.keySet()) {
-                discount = calculator.weekdayAndWeekendDiscount(menuChecker.getDessertCount(key));
-            }
+        for (String key : MenuMachine.menuBoard.keySet()) {
+            discount = calculator.weekdayAndWeekendDiscount(menuChecker.getDessertCount(key));
         }
         return discount;
     }
 
     public int weekendEvent(int date) {
         int discount = 0;
-        if (checkWeekdayOrWeekend(date)) {
-            for (String key : MenuMachine.menuBoard.keySet()) {
-                discount = calculator.weekdayAndWeekendDiscount(menuChecker.getMainCount(key));
-            }
+        for (String key : MenuMachine.menuBoard.keySet()) {
+            discount = calculator.weekdayAndWeekendDiscount(menuChecker.getMainCount(key));
         }
         return discount;
     }
