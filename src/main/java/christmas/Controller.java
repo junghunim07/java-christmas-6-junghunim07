@@ -29,8 +29,8 @@ public class Controller {
         output.notifyOrderMenu(MenuMachine.menuBoard);
     }
 
-    public void getBadge(int userBenefit) {
-        output.notifyBadge(Badge.getBadgeName(userBenefit));
+    public void getBadge() {
+        output.notifyBadge(Badge.getBadgeName(calculator.getTotalPrice()));
     }
 
     public int getTotalDiscount() {
@@ -47,18 +47,10 @@ public class Controller {
         if (eventChecker.checkSpecialEventPeriod(date)) {
             totalDiscount += eventChecker.specialEvent();
         }
-        if (eventChecker.checkGiftEvent(getTotalPrice())) {
+        if (eventChecker.checkGiftEvent(calculator.getTotalPrice())) {
             totalDiscount += eventChecker.giveGiftEvent();
         }
         return totalDiscount;
-    }
-
-    public int getTotalPrice() {
-        int totalPrice = 0;
-        for (String key : MenuMachine.menuBoard.keySet()) {
-            totalPrice += calculator.calculateTotalOrderAmount(key);
-        }
-        return totalPrice;
     }
 
     public void inputValueValidation(int date) {

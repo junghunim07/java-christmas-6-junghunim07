@@ -21,10 +21,18 @@ public class Calculator {
         return 1000;
     }
 
-    public int calculateTotalOrderAmount(String menu) {
+    private int calculateTotalOrderAmount(String menu) {
         int count = MenuMachine.menuBoard.get(menu);
         int price = ChristmasMenu.getPriceByName(menu);
         return count * price;
+    }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (String key : MenuMachine.menuBoard.keySet()) {
+            totalPrice += calculateTotalOrderAmount(key);
+        }
+        return totalPrice;
     }
 
     public int calculateAmountOfPayment(int totalPrice, int totalDiscount) {
