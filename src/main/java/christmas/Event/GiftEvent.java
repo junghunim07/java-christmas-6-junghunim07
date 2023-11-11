@@ -1,27 +1,19 @@
 package christmas.Event;
 
-import christmas.domain.Calculator;
 import christmas.domain.ChristmasMenu;
 
 public class GiftEvent {
     static final int LIMIT_LINE = 120_000;
-    Calculator calculator = new Calculator();
+    static final String EVENT_NAME = "증정 이벤트";
 
-    public void giveGiftEvent(int totalPrice) {
-        int discount = 0;
-        if (checkGiftEvent(totalPrice)) {
-            discount = giveGiftEventDiscount();
-        }
-    }
-
-    private boolean checkGiftEvent(int totalPrice) {
+    static boolean checkGiftEvent(int totalPrice) {
         if (totalPrice >= LIMIT_LINE) {
             return true;
         }
         return false;
     }
 
-    private int giveGiftEventDiscount() {
+    static int giveGiftEventDiscount() {
         return ChristmasMenu.valueOf("CHAMPAGNE").getPrice();
     }
 }

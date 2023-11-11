@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
-    int date;
+    public static int date;
+    public static int totalPrice;
     InputView input = new InputView();
     OutputView output = new OutputView();
     Calculator calculator = new Calculator();
@@ -25,11 +26,12 @@ public class Controller {
         output.notifyGetMenu();
         List<String> menus = input.getMenu();
         MenuMachine.transform(menus);
+        totalPrice = calculator.getTotalPrice();
         output.notifyOrderMenu(MenuMachine.menuBoard);
     }
 
     public void getBadge() {
-        output.notifyBadge(Badge.getBadgeName(calculator.getTotalPrice()));
+        output.notifyBadge(Badge.getBadgeName(totalPrice));
     }
 
     private void hasEvent(HashMap<String,Integer> eventTable) {
