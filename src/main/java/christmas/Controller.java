@@ -2,7 +2,6 @@ package christmas;
 
 import christmas.domain.Badge;
 import christmas.domain.Calculator;
-import christmas.domain.EventChecker;
 import christmas.domain.MenuMachine;
 import christmas.ui.InputView;
 import christmas.ui.OutputView;
@@ -14,7 +13,6 @@ public class Controller {
     InputView input = new InputView();
     OutputView output = new OutputView();
     Calculator calculator = new Calculator();
-    EventChecker eventChecker = new EventChecker();
 
     public void christmasPlannerStart() {
         output.notifyExplanation();
@@ -28,13 +26,6 @@ public class Controller {
         List<String> menus = input.getMenu();
         MenuMachine.transform(menus);
         output.notifyOrderMenu(MenuMachine.menuBoard);
-    }
-
-    public void getBenefitDetail() {
-        eventChecker.makeEventTable(date);
-        output.notifyBenefit();
-        hasEvent(EventChecker.eventTable);
-        int totalDiscount = calculator.getTotalDiscount(EventChecker.eventTable);
     }
 
     public void getBadge() {
