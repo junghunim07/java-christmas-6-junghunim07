@@ -31,7 +31,7 @@ public class EventChecker {
         return calculator.christmasDiscount(date);
     }
 
-    public int weekdayEvent(int date) {
+    public int weekdayEvent() {
         int discount = 0;
         for (String key : MenuMachine.menuBoard.keySet()) {
             discount = calculator.weekdayAndWeekendDiscount(menuChecker.getDessertCount(key));
@@ -39,7 +39,7 @@ public class EventChecker {
         return discount;
     }
 
-    public int weekendEvent(int date) {
+    public int weekendEvent() {
         int discount = 0;
         for (String key : MenuMachine.menuBoard.keySet()) {
             discount = calculator.weekdayAndWeekendDiscount(menuChecker.getMainCount(key));
@@ -47,12 +47,8 @@ public class EventChecker {
         return discount;
     }
 
-    public int specialEvent(int date) {
-        int discount = 0;
-        if (checkSpecialEventPeriod(date)) {
-            discount = calculator.specialDayDiscount();
-        }
-        return discount;
+    public int specialEvent() {
+        return calculator.specialDayDiscount();
     }
 
     public int giveGiftEvent() {
