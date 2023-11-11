@@ -27,29 +27,32 @@ public class EventChecker {
         return false;
     }
 
-    public void weekdayEvent(int date) {
+    public int weekdayEvent(int date) {
         int discount = 0;
         if (!checkWeekdayOrWeekend(date)) {
             for (String key : MenuMachine.menuBoard.keySet()) {
                 discount = calculator.weekdayAndWeekendDiscount(menuChecker.getDessertCount(key));
             }
         }
+        return discount;
     }
 
-    public void weekendEvent(int date) {
+    public int weekendEvent(int date) {
         int discount = 0;
         if (checkWeekdayOrWeekend(date)) {
             for (String key : MenuMachine.menuBoard.keySet()) {
                 discount = calculator.weekdayAndWeekendDiscount(menuChecker.getMainCount(key));
             }
         }
+        return discount;
     }
 
-    public void specialEvent(int date) {
+    public int specialEvent(int date) {
         int discount = 0;
         if (checkSpecialEventPeriod(date)) {
             discount = calculator.specialDayDiscount();
         }
+        return discount;
     }
 
     public int giveGiftEvent() {
