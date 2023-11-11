@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import java.util.HashMap;
+
 public class Calculator {
     public int christmasDiscount(int date) {
         return 1000 + 100 * (date - 1);
@@ -33,6 +35,16 @@ public class Calculator {
             totalPrice += calculateTotalOrderAmount(key);
         }
         return totalPrice;
+    }
+
+    public int getTotalDiscount(HashMap<String,Integer> eventTable) {
+        int discount = 0;
+        for (String key : eventTable.keySet()) {
+            if (eventTable.get(key) != 0) {
+                discount += eventTable.get(key);
+            }
+        }
+        return discount;
     }
 
     public int calculateAmountOfPayment(int totalPrice, int totalDiscount) {

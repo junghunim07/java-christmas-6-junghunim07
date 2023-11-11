@@ -33,26 +33,6 @@ public class Controller {
         output.notifyBadge(Badge.getBadgeName(calculator.getTotalPrice()));
     }
 
-    public int getTotalDiscount() {
-        int totalDiscount = 0;
-        if (eventChecker.checkChristmasEventPeriod(date)) {
-            totalDiscount += eventChecker.christmasEvent(date);
-        }
-        if (!eventChecker.checkWeekdayOrWeekend(date)) {
-            totalDiscount += eventChecker.weekdayEvent();
-        }
-        if (eventChecker.checkWeekdayOrWeekend(date)) {
-            totalDiscount += eventChecker.weekendEvent();
-        }
-        if (eventChecker.checkSpecialEventPeriod(date)) {
-            totalDiscount += eventChecker.specialEvent();
-        }
-        if (eventChecker.checkGiftEvent(calculator.getTotalPrice())) {
-            totalDiscount += eventChecker.giveGiftEvent();
-        }
-        return totalDiscount;
-    }
-
     public void inputValueValidation(int date) {
         if (date < 1 || date > 31) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
