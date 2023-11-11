@@ -6,13 +6,14 @@ import christmas.ui.OutputView;
 import java.util.List;
 
 public class Controller {
+    int date;
     InputView input = new InputView();
     OutputView output = new OutputView();
 
     public void christmasPlannerStart() {
         output.notifyExplanation();
         output.notifyVisitDate();
-        int date = input.getVisitDate();
+        date = input.getVisitDate();
         inputValueValidation(date);
     }
 
