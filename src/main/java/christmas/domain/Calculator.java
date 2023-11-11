@@ -17,4 +17,12 @@ public class Calculator {
     public int weekdayAndWeekendDiscount(int count) {
         return 2023 * count;
     }
+
+    public int calculateSpecialDay(int date) {
+        return date % 7;
+    }
+
+    public int specialDayDiscount() {
+        return 1000;
+    }
 }

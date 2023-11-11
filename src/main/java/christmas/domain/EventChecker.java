@@ -19,6 +19,14 @@ public class EventChecker {
         return false;
     }
 
+    public boolean checkSpecialEventPeriod(int date) {
+        int result = calculator.calculateSpecialDay(date);
+        if (result == 3 || date == 25) {
+            return true;
+        }
+        return false;
+    }
+
     public void weekdayEvent(int date) {
         int discount = 0;
         if (!checkWeekdayOrWeekend(date)) {
@@ -34,6 +42,13 @@ public class EventChecker {
             for (String key : MenuMachine.menuBoard.keySet()) {
                 discount = calculator.weekdayAndWeekendDiscount(menuChecker.getMainCount(key));
             }
+        }
+    }
+
+    public void specialEvent(int date) {
+        int discount = 0;
+        if (checkSpecialEventPeriod(date)) {
+            discount = calculator.specialDayDiscount();
         }
     }
 }
