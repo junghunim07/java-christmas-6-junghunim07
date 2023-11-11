@@ -8,16 +8,8 @@ public class EventChecker {
     MenuChecker menuChecker = new MenuChecker();
 
     public void makeEventTable(int date) {
-        checkWeekendEvent(date);
         checkSpecialEvent(date);
         checkGiftEvent(date);
-    }
-
-    private void checkWeekendEvent(int date) {
-        int result = calculator.calculateWeekdayOrWeekend(date);
-        if (result == 1 || result == 2) {
-            eventTable.put("주말 할인", weekendEventDiscount());
-        }
     }
 
     private void checkSpecialEvent(int date) {
@@ -31,14 +23,6 @@ public class EventChecker {
         if (totalPrice >= 120_000) {
             eventTable.put("증정 이벤트", giveGiftEventDiscount());
         }
-    }
-
-    private int weekendEventDiscount() {
-        int discount = 0;
-        for (String key : MenuMachine.menuBoard.keySet()) {
-            discount = calculator.weekdayAndWeekendDiscount(menuChecker.getMainCount(key));
-        }
-        return discount;
     }
 
     private int specialEventDiscount() {
