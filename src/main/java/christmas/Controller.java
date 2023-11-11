@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.Event.EventManager;
 import christmas.domain.Badge;
 import christmas.domain.Calculator;
 import christmas.domain.MenuMachine;
@@ -14,6 +15,7 @@ public class Controller {
     InputView input = new InputView();
     OutputView output = new OutputView();
     Calculator calculator = new Calculator();
+    EventManager eventManager = new EventManager();
 
     public void christmasPlannerStart() {
         output.notifyExplanation();
@@ -30,17 +32,12 @@ public class Controller {
         output.notifyOrderMenu(MenuMachine.menuBoard);
     }
 
-    public void getBadge() {
-        output.notifyBadge(Badge.getBadgeName(totalPrice));
+    public void getEventDetail() {
+        eventManager.getMakeEventTable();
     }
 
-    private void hasEvent(HashMap<String,Integer> eventTable) {
-        if (eventTable.size() > 0) {
-            output.notifyBenefitDetail(eventTable);
-        }
-        if (eventTable.size() == 0) {
-            output.notifyNotBenefit("없음");
-        }
+    public void getBadge() {
+        output.notifyBadge(Badge.getBadgeName(totalPrice));
     }
 
     public void inputValueValidation(int date) {
