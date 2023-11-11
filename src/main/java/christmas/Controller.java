@@ -29,6 +29,10 @@ public class Controller {
         output.notifyOrderMenu(MenuMachine.menuBoard);
     }
 
+    public void getBenefitDetail() {
+        eventChecker.makeEventTable(date);
+    }
+
     public void getBadge() {
         output.notifyBadge(Badge.getBadgeName(calculator.getTotalPrice()));
     }

@@ -3,50 +3,56 @@ package christmas.domain;
 import java.util.HashMap;
 
 public class EventChecker {
-    static HashMap<String, Integer> eventTable = new HashMap<>();
+    public static HashMap<String, Integer> eventTable = new HashMap<>();
     Calculator calculator = new Calculator();
     MenuChecker menuChecker = new MenuChecker();
 
-    public boolean checkChristmasEventPeriod(int date) {
-        if (date >= 1 && date <= 25) {
-            eventTable.put("크리스마스 디데이 할인", christmasEvent(date));
-            return true;
-        }
-        return false;
+    public void makeEventTable(int date) {
+        checkChristmasEvent(date);
+        checkWeekendEvent(date);
+        checkWeekdayEvent(date);
+        checkSpecialEvent(date);
+        checkGiftEvent(date);
     }
 
-    public boolean checkWeekdayOrWeekend(int date) {
+    private void checkChristmasEvent(int date) {
+        if (date >= 1 && date <= 25) {
+            eventTable.put("크리스마스 디데이 할인", christmasEventDiscount(date));
+        }
+    }
+
+    private void checkWeekendEvent(int date) {
         int result = calculator.calculateWeekdayOrWeekend(date);
         if (result == 1 || result == 2) {
-            eventTable.put("주말 할인", weekendEvent());
-            return true;
+            eventTable.put("주말 할인", weekendEventDiscount());
         }
-        eventTable.put("평일 할인", weekdayEvent());
-        return false;
     }
 
-    public boolean checkSpecialEventPeriod(int date) {
+    private void checkWeekdayEvent(int date) {
+        int result = calculator.calculateWeekdayOrWeekend(date);
+        if (!(result == 1 || result == 2)) {
+            eventTable.put("주말 할인", weekendEventDiscount());
+        }
+    }
+
+    private void checkSpecialEvent(int date) {
         int result = calculator.calculateSpecialDay(date);
         if (result == 3 || date == 25) {
-            eventTable.put("특별 할인", specialEvent());
-            return true;
+            eventTable.put("특별 할인", specialEventDiscount());
         }
-        return false;
     }
 
-    public boolean checkGiftEvent(int totalPrice) {
+    private void checkGiftEvent(int totalPrice) {
         if (totalPrice >= 120_000) {
-            eventTable.put("증정 이벤트", giveGiftEvent());
-            return true;
+            eventTable.put("증정 이벤트", giveGiftEventDiscount());
         }
-        return false;
     }
 
-    public int christmasEvent(int date) {
+    private int christmasEventDiscount(int date) {
         return calculator.christmasDiscount(date);
     }
 
-    public int weekdayEvent() {
+    private int weekdayEventDiscount() {
         int discount = 0;
         for (String key : MenuMachine.menuBoard.keySet()) {
             discount = calculator.weekdayAndWeekendDiscount(menuChecker.getDessertCount(key));
@@ -54,7 +60,7 @@ public class EventChecker {
         return discount;
     }
 
-    public int weekendEvent() {
+    private int weekendEventDiscount() {
         int discount = 0;
         for (String key : MenuMachine.menuBoard.keySet()) {
             discount = calculator.weekdayAndWeekendDiscount(menuChecker.getMainCount(key));
@@ -62,11 +68,11 @@ public class EventChecker {
         return discount;
     }
 
-    public int specialEvent() {
+    private int specialEventDiscount() {
         return calculator.specialDayDiscount();
     }
 
-    public int giveGiftEvent() {
+    private int giveGiftEventDiscount() {
         return ChristmasMenu.valueOf("CHAMPAGNE").getPrice();
     }
 }
