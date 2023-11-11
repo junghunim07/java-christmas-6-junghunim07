@@ -27,4 +27,13 @@ public class EventChecker {
             }
         }
     }
+
+    public void weekendEvent(int date) {
+        int discount = 0;
+        if (checkWeekdayOrWeekend(date)) {
+            for (String key : MenuMachine.menuBoard.keySet()) {
+                discount = calculator.weekdayAndWeekendDiscount(menuChecker.getMainCount(key));
+            }
+        }
+    }
 }
