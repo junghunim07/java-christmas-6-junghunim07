@@ -26,4 +26,8 @@ public class Calculator {
         int price = ChristmasMenu.getPriceByName(menu);
         return count * price;
     }
+
+    public int calculateAmountOfPayment(int totalPrice, int totalDiscount) {
+        return totalPrice - totalDiscount;
+    }
 }
