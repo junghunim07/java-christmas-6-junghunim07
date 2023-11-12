@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.ui.OutputView;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,14 +15,14 @@ public class MenuMachine {
 
     private String menuValidation(String menu) {
         if (menuBoard.containsKey(menu)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
         for (ChristmasMenu christmasMenu : ChristmasMenu.values()) {
             if (christmasMenu.getName().equals(menu)) {
                 return menu;
             }
         }
-        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
     }
 
     private int menuCountValidation(String number) {
@@ -29,7 +30,7 @@ public class MenuMachine {
             int count = Integer.parseInt(number);
             return count;
         }catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }
 }

@@ -1,9 +1,9 @@
 package christmas;
 
 import christmas.Event.EventManager;
-import christmas.Event.GiftEvent;
 import christmas.domain.Badge;
 import christmas.domain.Calculator;
+import christmas.domain.ChristmasMenu;
 import christmas.domain.MenuMachine;
 import christmas.ui.InputView;
 import christmas.ui.OutputView;
@@ -40,7 +40,6 @@ public class Controller {
         checkGift();
         eventManager.getMakeEventTable();
         totalDiscount = calculator.getTotalDiscount(EventManager.eventTable);
-        output.notifyBenefit();
         printEventDetail();
         output.notifyAllAmountOfBenefit(totalDiscount);
         output.notifyAmountOfPayment(calculator.calculateAmountOfPayment(giftPrice));
@@ -52,7 +51,7 @@ public class Controller {
 
     private void printEventDetail() {
         if (EventManager.eventTable.isEmpty()) {
-            output.notifyNotBenefit("없음");
+            output.notifyNotBenefit(OutputView.NOTHING);
         }
         if (!EventManager.eventTable.isEmpty()) {
             output.notifyBenefitDetail(EventManager.eventTable);
@@ -60,19 +59,19 @@ public class Controller {
     }
 
     private void checkGift() {
-        if (totalPrice < 120_000) {
+        if (totalPrice < EventManager.LIMIT_LINE) {
             giftPrice = 0;
-            output.notifyGiftMenu("없음");
+            output.notifyGiftMenu(OutputView.NOTHING);
         }
-        if (totalPrice >= 120_000) {
-            giftPrice = 25_000;
-            output.notifyGiftMenu("샴페인 1개");
+        if (totalPrice >= EventManager.LIMIT_LINE) {
+            giftPrice = ChristmasMenu.CHAMPAGNE.getPrice();
+            output.notifyGiftMenu(ChristmasMenu.CHAMPAGNE.getName() + OutputView.SPACE +"1" + OutputView.COUNT);
         }
     }
 
     public void inputValueValidation(int date) {
         if (date < 1 || date > 31) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_DATE_ERROR);
         }
     }
 }

@@ -7,9 +7,7 @@ public class WeekdaySaleEvent {
 
     static boolean checkWeekdayEvent(Calculator calculator, int date) {
         int result = calculator.calculateWeekdayOrWeekend(date);
-        if (result == Calendar.SUNDAY.getDate() || result == Calendar.MONDAY.getDate()
-            || result == Calendar.TUESDAY.getDate() || result == Calendar.WEDNESDAY.getDate()
-            || result == Calendar.THURSDAY.getDate()) {
+        if (!(result == Calendar.FRIDAY.getDate() || result == Calendar.SATURDAY.getDate())) {
             return true;
         }
         return false;

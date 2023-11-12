@@ -4,24 +4,28 @@ import christmas.Controller;
 import java.util.HashMap;
 
 public class Calculator {
+    private static final int INITIAL_DISCOUNT = 1000;
+    private static final int CHRISTMAS_EVENT_INCREASE_AMOUNT = 100;
+    private static final int WEEK = 7;
+    private static final int THIS_YEAR = 2023;
     public int christmasDiscount(int date) {
-        return 1000 + 100 * (date - 1);
+        return INITIAL_DISCOUNT + CHRISTMAS_EVENT_INCREASE_AMOUNT * (--date);
     }
 
     public int calculateWeekdayOrWeekend(int date) {
-        return date % 7;
+        return date % WEEK;
     }
 
     public int weekdayAndWeekendDiscount(int count) {
-        return 2023 * count;
+        return THIS_YEAR * count;
     }
 
     public int calculateSpecialDay(int date) {
-        return date % 7;
+        return date % WEEK;
     }
 
     public int specialDayDiscount() {
-        return 1000;
+        return INITIAL_DISCOUNT;
     }
 
     private int calculateTotalOrderAmount(HashMap<String, Integer> menuBoard, String menu) {

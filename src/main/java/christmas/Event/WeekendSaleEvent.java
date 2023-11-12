@@ -6,8 +6,8 @@ public class WeekendSaleEvent {
     static final String EVENT_NAME = "주말 할인";
 
     static boolean checkWeekendEvent(Calculator calculator, int date) {
-        int result = calculator.calculateWeekdayOrWeekend(date);
-        if (result == Calendar.FRIDAY.getDate() || result == Calendar.SATURDAY.getDate()) {
+        int day = calculator.calculateWeekdayOrWeekend(date);
+        if (day == Calendar.FRIDAY.getDate() || day == Calendar.SATURDAY.getDate()) {
             return true;
         }
         return false;
