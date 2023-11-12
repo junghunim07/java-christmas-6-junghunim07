@@ -8,25 +8,23 @@ import java.util.HashMap;
 
 public class EventManager {
 
-    public static HashMap<String, Integer> eventTable;
+    private HashMap<String, Integer> eventTable;
     public static final int CHRISTMAS = 25;
     public static final int DECEMBER_START = 1;
     public static final int LIMIT_LINE = 120_000;
     Calculator calculator;
     MenuChecker menuChecker;
-    MenuMachine menuMachine;
 
     public EventManager() {
         eventTable = new HashMap<>();
         calculator = new Calculator();
         menuChecker = new MenuChecker();
-        menuMachine = new MenuMachine();
     }
 
-    public void getMakeEventTable(HashMap<String, Integer> menuBoard) {
+    public void getMakeEventTable(MenuMachine menuMachine) {
         checkChristmasEvent();
-        checkWeekdayEvent(menuBoard);
-        checkWeekendEvent(menuBoard);
+        checkWeekdayEvent(menuMachine);
+        checkWeekendEvent(menuMachine);
         checkSpecialEvent();
         checkGiftEvent();
     }
@@ -37,11 +35,11 @@ public class EventManager {
         }
     }
 
-    private void checkWeekdayEvent(HashMap<String, Integer> menuBoard) {
+    private void checkWeekdayEvent(MenuMachine menuMachine) {
         int discount = 0;
         if (WeekdaySaleEvent.checkWeekdayEvent(calculator, Controller.date)) {
-            for (String key : menuBoard.keySet()) {
-                discount += WeekdaySaleEvent.weekdayEventDiscount(calculator, menuChecker.getDessertCount(key));
+            for (String key : menuMachine.getMenuBoard().keySet()) {
+                discount += WeekdaySaleEvent.weekdayEventDiscount(calculator, menuChecker.getDessertCount(menuMachine, key));
             }
             eventTable.put(WeekdaySaleEvent.EVENT_NAME, discount);
         }
@@ -50,11 +48,11 @@ public class EventManager {
         }
     }
 
-    private void checkWeekendEvent(HashMap<String, Integer> menuBoard) {
+    private void checkWeekendEvent(MenuMachine menuMachine) {
         int discount = 0;
         if (WeekendSaleEvent.checkWeekendEvent(calculator, Controller.date)) {
-            for (String key : menuBoard.keySet()) {
-                discount += WeekendSaleEvent.weekendEventDiscount(calculator, menuChecker.getMainCount(key));
+            for (String key : menuMachine.getMenuBoard().keySet()) {
+                discount += WeekendSaleEvent.weekendEventDiscount(calculator, menuChecker.getMainCount(menuMachine, key));
             }
             eventTable.put(WeekendSaleEvent.EVENT_NAME, discount);
         }
@@ -73,5 +71,9 @@ public class EventManager {
         if (GiftEvent.checkGiftEvent(Controller.totalPrice)) {
             eventTable.put(GiftEvent.EVENT_NAME, GiftEvent.giveGiftEventDiscount());
         }
+    }
+
+    public HashMap<String,Integer> getEventTable() {
+        return eventTable;
     }
 }

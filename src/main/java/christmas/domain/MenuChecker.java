@@ -1,28 +1,27 @@
 package christmas.domain;
 
 public class MenuChecker {
-    MenuMachine menuMachine = new MenuMachine();
-    public int getDessertCount(String menu) {
+    public int getDessertCount(MenuMachine menuMachine, String menu) {
         int count = 0;
         for (ChristmasMenu christmasMenu : ChristmasMenu.values()) {
             if (christmasMenu.getCategory().equals(MenuCategory.DESSERT)) {
-                count += getMenuCount(christmasMenu, menu);
+                count += getMenuCount(menuMachine, christmasMenu, menu);
             }
         }
         return count;
     }
 
-    public int getMainCount(String menu) {
+    public int getMainCount(MenuMachine menuMachine, String menu) {
         int count = 0;
         for (ChristmasMenu christmasMenu : ChristmasMenu.values()) {
             if (christmasMenu.getCategory().equals(MenuCategory.MAIN)) {
-                count += getMenuCount(christmasMenu, menu);
+                count += getMenuCount(menuMachine, christmasMenu, menu);
             }
         }
         return count;
     }
 
-    public int getMenuCount(ChristmasMenu christmasMenu, String key) {
+    public int getMenuCount(MenuMachine menuMachine, ChristmasMenu christmasMenu, String key) {
         if (christmasMenu.getName().equals(key)) {
             return menuMachine.getMenuBoard().get(key);
         }

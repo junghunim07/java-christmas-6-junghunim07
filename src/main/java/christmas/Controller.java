@@ -38,8 +38,8 @@ public class Controller {
 
     public void getEventDetail() {
         checkGift();
-        eventManager.getMakeEventTable(menuMachine.getMenuBoard());
-        totalDiscount = calculator.getTotalDiscount(EventManager.eventTable);
+        eventManager.getMakeEventTable(menuMachine);
+        totalDiscount = calculator.getTotalDiscount(eventManager.getEventTable());
         printEventDetail();
         output.notifyAllAmountOfBenefit(totalDiscount);
         output.notifyAmountOfPayment(calculator.calculateAmountOfPayment(giftPrice));
@@ -50,11 +50,11 @@ public class Controller {
     }
 
     private void printEventDetail() {
-        if (EventManager.eventTable.isEmpty()) {
+        if (eventManager.getEventTable().isEmpty()) {
             output.notifyNotBenefit(OutputView.NOTHING);
         }
-        if (!EventManager.eventTable.isEmpty()) {
-            output.notifyBenefitDetail(EventManager.eventTable);
+        if (!eventManager.getEventTable().isEmpty()) {
+            output.notifyBenefitDetail(eventManager.getEventTable());
         }
     }
 
@@ -65,7 +65,7 @@ public class Controller {
         }
         if (totalPrice >= EventManager.LIMIT_LINE) {
             giftPrice = ChristmasMenu.CHAMPAGNE.getPrice();
-            output.notifyGiftMenu(ChristmasMenu.CHAMPAGNE.getName() + OutputView.SPACE +"1" + OutputView.COUNT);
+            output.notifyGiftMenu(ChristmasMenu.CHAMPAGNE.getName() + OutputView.SPACE + "1" + OutputView.COUNT);
         }
     }
 

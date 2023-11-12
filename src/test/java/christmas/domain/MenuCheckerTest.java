@@ -22,7 +22,7 @@ class MenuCheckerTest {
         menuMachine.transform(List.of("해산물파스타", "1", "초코케이크", "2", "아이스크림", "2"));
         int result = 0;
         for (String key: menuMachine.getMenuBoard().keySet()) {
-            result += menuChecker.getDessertCount(key);
+            result += menuChecker.getDessertCount(menuMachine, key);
         }
         int expectedResult = 4;
         assertThat(result).isEqualTo(expectedResult);
@@ -34,7 +34,7 @@ class MenuCheckerTest {
         menuMachine.transform(List.of("해산물파스타", "1", "티본스테이크", "1", "바비큐립", "1"));
         int result = 0;
         for (String key: menuMachine.getMenuBoard().keySet()) {
-            result += menuChecker.getMainCount(key);
+            result += menuChecker.getMainCount(menuMachine, key);
         }
         int expectedResult = 3;
         assertThat(result).isEqualTo(expectedResult);
