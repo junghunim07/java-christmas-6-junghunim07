@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MenuMachine {
-    public HashMap<String, Integer> menuBoard = new HashMap<>();
+    private HashMap<String, Integer> menuBoard = new HashMap<>();
 
     public void transform(List<String> menus) {
         for (int i = 0; i < menus.size(); i += 2) {
@@ -32,5 +32,9 @@ public class MenuMachine {
         }catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
+    }
+
+    public HashMap<String, Integer> getMenuBoard() {
+        return menuBoard;
     }
 }

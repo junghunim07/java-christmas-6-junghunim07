@@ -31,14 +31,14 @@ public class Controller {
         output.notifyGetMenu();
         List<String> menus = input.getMenu();
         menuMachine.transform(menus);
-        output.notifyOrderMenu(menuMachine.menuBoard);
-        totalPrice = calculator.getTotalPrice(menuMachine.menuBoard);
+        output.notifyOrderMenu(menuMachine.getMenuBoard());
+        totalPrice = calculator.getTotalPrice(menuMachine.getMenuBoard());
         output.notifyPayment(totalPrice);
     }
 
     public void getEventDetail() {
         checkGift();
-        eventManager.getMakeEventTable();
+        eventManager.getMakeEventTable(menuMachine.getMenuBoard());
         totalDiscount = calculator.getTotalDiscount(EventManager.eventTable);
         printEventDetail();
         output.notifyAllAmountOfBenefit(totalDiscount);

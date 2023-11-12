@@ -45,6 +45,6 @@ class MenuMachineTest {
         menuMachine.transform(List.of("해산물파스타", "1"));
         HashMap<String, Integer> expectedResult = new HashMap<>();
         expectedResult.put("해산물파스타", 1);
-        assertThat(menuMachine.menuBoard).isEqualTo(expectedResult);
+        assertThat(menuMachine.getMenuBoard()).isEqualTo(expectedResult);
     }
 }

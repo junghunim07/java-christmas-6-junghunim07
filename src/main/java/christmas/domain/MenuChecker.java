@@ -24,7 +24,7 @@ public class MenuChecker {
 
     public int getMenuCount(ChristmasMenu christmasMenu, String key) {
         if (christmasMenu.getName().equals(key)) {
-            return menuMachine.menuBoard.get(key);
+            return menuMachine.getMenuBoard().get(key);
         }
         return 0;
     }
