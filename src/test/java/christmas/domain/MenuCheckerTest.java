@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class MenuCheckerTest {
     MenuChecker menuChecker;
+    MenuMachine menuMachine;
 
     @BeforeEach
     void setUp() {
@@ -18,9 +19,9 @@ class MenuCheckerTest {
     @DisplayName("디저트 개수 테스트")
     @Test
     void getDessertCount() {
-        MenuMachine.transform(List.of("해산물파스타", "1", "초코케이크", "2", "아이스크림", "2"));
+        menuMachine.transform(List.of("해산물파스타", "1", "초코케이크", "2", "아이스크림", "2"));
         int result = 0;
-        for (String key: MenuMachine.menuBoard.keySet()) {
+        for (String key: menuMachine.menuBoard.keySet()) {
             result += menuChecker.getDessertCount(key);
         }
         int expectedResult = 4;
@@ -30,9 +31,9 @@ class MenuCheckerTest {
     @DisplayName("메인 개수 테스트")
     @Test
     void getMainCount() {
-        MenuMachine.transform(List.of("해산물파스타", "1", "티본스테이크", "1", "바비큐립", "1"));
+        menuMachine.transform(List.of("해산물파스타", "1", "티본스테이크", "1", "바비큐립", "1"));
         int result = 0;
-        for (String key: MenuMachine.menuBoard.keySet()) {
+        for (String key: menuMachine.menuBoard.keySet()) {
             result += menuChecker.getMainCount(key);
         }
         int expectedResult = 3;

@@ -10,11 +10,13 @@ public class EventManager {
     public static HashMap<String, Integer> eventTable;
     Calculator calculator;
     MenuChecker menuChecker;
+    MenuMachine menuMachine;
 
     public EventManager() {
         eventTable = new HashMap<>();
         calculator = new Calculator();
         menuChecker = new MenuChecker();
+        menuMachine = new MenuMachine();
     }
 
     public void getMakeEventTable() {
@@ -34,7 +36,7 @@ public class EventManager {
     private void checkWeekdayEvent() {
         int discount = 0;
         if (WeekdaySaleEvent.checkWeekdayEvent(calculator, Controller.date)) {
-            for (String key : MenuMachine.menuBoard.keySet()) {
+            for (String key : menuMachine.menuBoard.keySet()) {
                 discount += WeekdaySaleEvent.weekdayEventDiscount(calculator, menuChecker.getDessertCount(key));
             }
             eventTable.put(WeekdaySaleEvent.EVENT_NAME, discount);
@@ -47,7 +49,7 @@ public class EventManager {
     private void checkWeekendEvent() {
         int discount = 0;
         if (WeekendSaleEvent.checkWeekendEvent(calculator, Controller.date)) {
-            for (String key : MenuMachine.menuBoard.keySet()) {
+            for (String key : menuMachine.menuBoard.keySet()) {
                 discount += WeekendSaleEvent.weekendEventDiscount(calculator, menuChecker.getMainCount(key));
             }
             eventTable.put(WeekendSaleEvent.EVENT_NAME, discount);

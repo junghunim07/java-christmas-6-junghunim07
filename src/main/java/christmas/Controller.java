@@ -18,6 +18,7 @@ public class Controller {
     OutputView output = new OutputView();
     Calculator calculator = new Calculator();
     EventManager eventManager = new EventManager();
+    MenuMachine menuMachine = new MenuMachine();
 
     public void christmasPlannerStart() {
         output.notifyExplanation();
@@ -29,8 +30,8 @@ public class Controller {
     public void getMenuStart() {
         output.notifyGetMenu();
         List<String> menus = input.getMenu();
-        MenuMachine.transform(menus);
-        output.notifyOrderMenu(MenuMachine.menuBoard);
+        menuMachine.transform(menus);
+        output.notifyOrderMenu(menuMachine.menuBoard);
         totalPrice = calculator.getTotalPrice();
         output.notifyPayment(totalPrice);
     }
