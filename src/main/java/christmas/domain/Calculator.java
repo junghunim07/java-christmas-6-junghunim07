@@ -4,7 +4,6 @@ import christmas.Controller;
 import java.util.HashMap;
 
 public class Calculator {
-    MenuMachine menuMachine = new MenuMachine();
     public int christmasDiscount(int date) {
         return 1000 + 100 * (date - 1);
     }
@@ -25,16 +24,16 @@ public class Calculator {
         return 1000;
     }
 
-    private int calculateTotalOrderAmount(String menu) {
-        int count = menuMachine.menuBoard.get(menu);
+    private int calculateTotalOrderAmount(HashMap<String, Integer> menuBoard, String menu) {
+        int count = menuBoard.get(menu);
         int price = ChristmasMenu.getPriceByName(menu);
         return count * price;
     }
 
-    public int getTotalPrice() {
+    public int getTotalPrice(HashMap<String, Integer> menuBoard) {
         int totalPrice = 0;
-        for (String key : menuMachine.menuBoard.keySet()) {
-            totalPrice += calculateTotalOrderAmount(key);
+        for (String key : menuBoard.keySet()) {
+            totalPrice += calculateTotalOrderAmount(menuBoard, key);
         }
         return totalPrice;
     }

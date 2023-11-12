@@ -32,7 +32,7 @@ public class Controller {
         List<String> menus = input.getMenu();
         menuMachine.transform(menus);
         output.notifyOrderMenu(menuMachine.menuBoard);
-        totalPrice = calculator.getTotalPrice();
+        totalPrice = calculator.getTotalPrice(menuMachine.menuBoard);
         output.notifyPayment(totalPrice);
     }
 
