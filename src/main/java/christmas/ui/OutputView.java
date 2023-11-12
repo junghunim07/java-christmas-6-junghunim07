@@ -17,6 +17,7 @@ public class OutputView {
     private static final String NOTIFY_TOTAL_BENEFIT_AMOUNT = "<총혜택 금액>" + NEW_LINE;
     private static final String NOTIFY_PAYMENT_AMOUNT_AFTER_DISCOUNT = "<할인 후 예상 결제 금액>" + NEW_LINE;
     private static final String NOTIFY_DECEMBER_BADGE = "<12월 이벤트 배지>" + NEW_LINE;
+    private static final String NOTIFY_BENEFIT_PREVIEW = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!" + NEW_LINE;
 
     public static final String SPACE = " ";
     public static final String COUNT = "개";
@@ -43,6 +44,10 @@ public class OutputView {
         System.out.print(NEW_LINE);
     }
 
+    public void notifyPreview(int date) {
+        System.out.printf(NOTIFY_BENEFIT_PREVIEW + NEW_LINE, date);
+    }
+
     public void notifyPayment(int totalPrice) {
         System.out.println(NOTIFY_TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT + totalPrice + NEW_LINE);
     }
@@ -59,7 +64,7 @@ public class OutputView {
 
     public void notifyNotBenefit(String event) {
         System.out.println("<혜택 내역>");
-        System.out.println(event);
+        System.out.println(event + NEW_LINE);
     }
     
     public void notifyAllAmountOfBenefit(int totalDiscount) {

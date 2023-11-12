@@ -30,6 +30,7 @@ public class Controller {
 
     public void getMenuStart() {
         output.notifyGetMenu();
+        output.notifyPreview(date);
         List<String> menus = input.getMenu();
         menuMachine.transform(menus);
         output.notifyOrderMenu(menuMachine.getMenuBoard());
