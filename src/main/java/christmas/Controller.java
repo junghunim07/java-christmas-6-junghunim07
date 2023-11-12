@@ -15,11 +15,11 @@ public class Controller {
     OutputView output = new OutputView();
     Calculator calculator = new Calculator();
     EventManager eventManager = new EventManager();
+    MenuMachine menuMachine = new MenuMachine();
 
     public static int date;
     public static int totalPrice;
     public static int totalDiscount;
-    MenuMachine menuMachine = new MenuMachine();
 
     public void christmasPlannerStart() {
         output.notifyExplanation();
