@@ -7,7 +7,10 @@ import christmas.domain.MenuMachine;
 import java.util.HashMap;
 
 public class EventManager {
+
     public static HashMap<String, Integer> eventTable;
+    public static final int CHRISTMAS = 25;
+    public static final int DECEMBER_START = 1;
     Calculator calculator;
     MenuChecker menuChecker;
     MenuMachine menuMachine;
