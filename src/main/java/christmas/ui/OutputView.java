@@ -58,7 +58,8 @@ public class OutputView {
     }
 
     public void notifyNotBenefit(String event) {
-        System.out.println(NOTIFY_BENEFIT_DETAIL + event + NEW_LINE);
+        System.out.println("<혜택 내역>");
+        System.out.println(event);
     }
     
     public void notifyAllAmountOfBenefit(int totalDiscount) {

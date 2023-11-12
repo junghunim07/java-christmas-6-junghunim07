@@ -10,14 +10,15 @@ import christmas.ui.OutputView;
 import java.util.List;
 
 public class Controller {
-    public static int date;
-    public static int totalPrice;
-    public static int totalDiscount;
     int giftPrice;
     InputView input = new InputView();
     OutputView output = new OutputView();
     Calculator calculator = new Calculator();
     EventManager eventManager = new EventManager();
+
+    public static int date;
+    public static int totalPrice;
+    public static int totalDiscount;
     MenuMachine menuMachine = new MenuMachine();
 
     public void christmasPlannerStart() {
@@ -70,7 +71,7 @@ public class Controller {
     }
 
     public void inputValueValidation(int date) {
-        if (date < 1 || date > 31) {
+        if (date < EventManager.DECEMBER_START || date > EventManager.DECEMBER_LAST) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_DATE_ERROR);
         }
     }

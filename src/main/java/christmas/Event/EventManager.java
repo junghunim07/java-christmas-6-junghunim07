@@ -9,11 +9,13 @@ import java.util.HashMap;
 public class EventManager {
 
     private HashMap<String, Integer> eventTable;
-    public static final int CHRISTMAS = 25;
-    public static final int DECEMBER_START = 1;
-    public static final int LIMIT_LINE = 120_000;
     Calculator calculator;
     MenuChecker menuChecker;
+
+    public static final int CHRISTMAS = 25;
+    public static final int DECEMBER_START = 1;
+    public static final int DECEMBER_LAST = 31;
+    public static final int LIMIT_LINE = 120_000;
 
     public EventManager() {
         eventTable = new HashMap<>();
