@@ -1,6 +1,6 @@
 package christmas.domain.Menu;
 
-enum MenuName {
+public enum MenuName {
     MUSHROOM_SOUP("양송이수프", 6_000, Category.APPETIZER),
     TAPAS("타파스", 5_500, Category.APPETIZER),
     CAESAR_SALAD("시저샐러드", 8_000, Category.APPETIZER),
