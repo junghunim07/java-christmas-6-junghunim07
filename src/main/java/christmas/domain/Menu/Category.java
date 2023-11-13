@@ -1,6 +1,6 @@
 package christmas.domain.Menu;
 
-enum Category {
+public enum Category {
     APPETIZER("애피타이저"),
     MAIN("메인"),
     DESSERT("디저트"),
