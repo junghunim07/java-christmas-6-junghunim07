@@ -1,6 +1,6 @@
 package christmas.domain.Badge;
 
-public enum Badge {
+enum Badge {
     NOTHING(0, "없음"),
     STAR(5_000, "별"),
     TREE(10_000, "트리"),
