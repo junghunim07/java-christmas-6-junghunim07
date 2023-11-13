@@ -1,0 +1,23 @@
+package christmas.domain.Order;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
+class OrderMachineTest {
+    OrderMachine orderMachine;
+
+    @BeforeEach
+    void setUp() {
+        orderMachine = new OrderMachine();
+    }
+
+    @DisplayName("메뉴판에 없는 메뉴를 주문했을 때 예외 테스트")
+    @Test
+    void addOrderMenu() {
+        assertThatThrownBy(() -> orderMachine.addOrderMenu("딸기케이크", 1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+}
