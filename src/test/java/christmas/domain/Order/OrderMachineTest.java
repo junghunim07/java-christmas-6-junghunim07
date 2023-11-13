@@ -20,4 +20,11 @@ class OrderMachineTest {
         assertThatThrownBy(() -> orderMachine.addOrderMenu("딸기케이크", 1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("최대 주문 20개를 넘었을 때 예외 테스트")
+    @Test
+    void totalCount() {
+        assertThatThrownBy(() -> orderMachine.totalCountValidation(21))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
