@@ -8,6 +8,7 @@ import java.util.List;
 public class OrderMachine {
     private static final int MAXIMUM_ORDER_COUNT = 20;
     private List<Order> OrderBoard;
+    private int TotalPaymentAmount = 0;
 
     public OrderMachine() {
         OrderBoard = new ArrayList<>();
@@ -30,6 +31,16 @@ public class OrderMachine {
         if (totalCount > MAXIMUM_ORDER_COUNT) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
+    }
+
+    public void calculateTotalPayment() {
+        for (Order order : OrderBoard) {
+            TotalPaymentAmount += Order.getPayment(order);
+        }
+    }
+
+    public int getTotalPaymentAmount() {
+        return TotalPaymentAmount;
     }
 
     public List<Order> getOrderBoard() {

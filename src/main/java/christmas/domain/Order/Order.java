@@ -19,7 +19,7 @@ public class Order {
         return orderCount;
     }
 
-    public int getPayment(Order order) {
+    public static int getPayment(Order order) {
         int payment = 0;
         for (MenuName menuName : MenuName.values()) {
             if (menuName.getMenuName().equals(order.getOrderMenuName())) {
