@@ -1,7 +1,6 @@
 package christmas;
 
 import christmas.Event.EventManager;
-import christmas.domain.Badge;
 import christmas.domain.Calculator;
 import christmas.domain.ChristmasMenu;
 import christmas.domain.MenuMachine;
