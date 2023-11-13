@@ -19,6 +19,7 @@ public class OrderMachine {
 
     public void addOrderMenu(String name, int count) {
         menuValidation(name);
+        menuDuplicateValidation(name);
         OrderBoard.add(new Order(name, count));
     }
 
@@ -27,6 +28,14 @@ public class OrderMachine {
                 .map(MenuName::getMenuName).collect(Collectors.toSet());
         if (!menuNames.contains(name)) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
+        }
+    }
+
+    private void menuDuplicateValidation(String name) {
+        for (int i = 0; i < OrderBoard.size(); i++) {
+            if (OrderBoard.get(i).getOrderMenuName().equals(name)) {
+                throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
+            }
         }
     }
 

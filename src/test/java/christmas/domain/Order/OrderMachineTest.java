@@ -21,6 +21,15 @@ class OrderMachineTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("중복된 메뉴를 주문했을 때 예외 테스트")
+    @Test
+    void duplicateMenu() {
+        orderMachine.addOrderMenu("초코케이크", 1);
+        orderMachine.addOrderMenu("아이스크림", 1);
+        assertThatThrownBy(() -> orderMachine.addOrderMenu("초코케이크", 1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("최대 주문 20개를 넘었을 때 예외 테스트")
     @Test
     void totalCount() {
