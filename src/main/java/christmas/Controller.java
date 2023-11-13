@@ -43,6 +43,7 @@ public class Controller {
         output.notifyGetMenu();
         output.notifyPreview(date);
         makeOrderBoard();
+        orderMachine.totalCountValidation(countAllOrderMenu(orderMachine.getOrderBoard()));
         callOutputForPrintOrderMenu(orderMachine.getOrderBoard());
         orderMachine.calculateTotalPayment();
         output.notifyPayment(orderMachine.getTotalPaymentAmount());
@@ -101,6 +102,14 @@ public class Controller {
         if (date < 1 || date > 31) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_DATE_ERROR);
         }
+    }
+
+    private int countAllOrderMenu(List<Order> orderBoard) {
+        int totalCount = 0;
+        for (Order order : orderBoard) {
+            totalCount += order.getOrderCount();
+        }
+        return totalCount;
     }
 
     private int calculateAmountOfPayment() {
