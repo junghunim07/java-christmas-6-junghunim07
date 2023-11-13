@@ -1,7 +1,6 @@
 package christmas.domain.Event;
 
 import christmas.domain.Menu.Category;
-import christmas.domain.Menu.MenuMachine;
 import christmas.domain.Menu.MenuName;
 import christmas.domain.Order.Order;
 import christmas.domain.Order.OrderMachine;
@@ -15,6 +14,7 @@ public class EventMachine {
     private WeekdayEvent weekdayEvent;
     private WeekendEvent weekendEvent;
     private SpecialEvent specialEvent;
+    private GiftEvent giftEvent;
 
     public EventMachine() {
         eventTable = new ArrayList<>();
@@ -23,6 +23,7 @@ public class EventMachine {
         weekdayEvent = new WeekdayEvent(EventName.WEEKDAY_EVENT.getEventName(), 0);
         weekendEvent = new WeekendEvent(EventName.WEEKEND_EVENT.getEventName(), 0);
         specialEvent = new SpecialEvent(EventName.SPECIAL_EVENT.getEventName(), 0);
+        giftEvent = new GiftEvent(EventName.GIFT_EVENT.getEventName(), 0);
     }
 
     public void getEventStatus(int date) {
@@ -32,6 +33,8 @@ public class EventMachine {
         eventTable.add(new Event(EventName.WEEKEND_EVENT.getEventName()
                 , weekendEvent.getWeekendDiscount(date, getMainCount(orderMachine.getOrderBoard()))));
         eventTable.add(new Event(EventName.SPECIAL_EVENT.getEventName(), specialEvent.getSpecialEventDiscount(date)));
+        eventTable.add(new Event(EventName.GIFT_EVENT.getEventName()
+                , giftEvent.getGiftEventDiscount(orderMachine.getTotalPaymentAmount(), MenuName.CHAMPAGNE.getPrice())));
     }
 
     private int getDessertCount(List<Order> orderBoard) {

@@ -23,7 +23,7 @@ public class WeekendEvent {
 
     private boolean weekendValidation(int date) {
         if (date >= EventName.WEEKEND_EVENT.getEventStartDate()
-                && date <= EventName.WEEKDAY_EVENT.getEventFinishDate()) {
+                && date <= EventName.WEEKEND_EVENT.getEventFinishDate()) {
             if ((date % WEEK) == FRIDAY || (date % WEEK) == SATURDAY) {
                 return true;
             }
