@@ -14,22 +14,21 @@ public class OrderMachine {
     }
 
     public void addOrderMenu(String name, int count) {
-        validation(name);
+        menuValidation(name);
         OrderBoard.add(new Order(name, count));
     }
 
-    private void validation(String name) {
+    private void menuValidation(String name) {
         for (MenuName menuName : MenuName.values()) {
             if (!menuName.getMenuName().equals(name)) {
                 throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
             }
         }
-        int totalCount = 0;
-        for (Order order : OrderBoard) {
-            totalCount += order.getOrderCount();
-            if (totalCount > MAXIMUM_ORDER_COUNT) {
-                throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
-            }
+    }
+
+    public void totalCountValidation(int totalCount) {
+        if (totalCount > MAXIMUM_ORDER_COUNT) {
+            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }
 
