@@ -4,7 +4,6 @@ import christmas.domain.Badge.BadgeMachine;
 import christmas.domain.Event.Event;
 import christmas.domain.Event.EventMachine;
 import christmas.domain.Event.EventName;
-import christmas.domain.Menu.Menu;
 import christmas.domain.Menu.MenuMachine;
 import christmas.domain.Menu.MenuName;
 import christmas.domain.Order.Order;
@@ -22,7 +21,7 @@ public class Controller {
     OrderMachine orderMachine;
     EventMachine eventMachine;
     BadgeMachine badgeMachine;
-    private static MenuMachine menuMachine = new MenuMachine();
+    MenuMachine menuMachine;
 
     Controller() {
         input = new InputView();
@@ -30,6 +29,7 @@ public class Controller {
         orderMachine = new OrderMachine();
         eventMachine = new EventMachine();
         badgeMachine = new BadgeMachine();
+        menuMachine = new MenuMachine();
     }
 
     public void christmasPlannerStart() {
