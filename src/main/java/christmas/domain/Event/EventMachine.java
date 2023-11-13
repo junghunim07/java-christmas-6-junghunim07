@@ -14,6 +14,7 @@ public class EventMachine {
     private ChristmasEvent christmasEvent;
     private WeekdayEvent weekdayEvent;
     private WeekendEvent weekendEvent;
+    private SpecialEvent specialEvent;
 
     public EventMachine() {
         eventTable = new ArrayList<>();
@@ -21,6 +22,7 @@ public class EventMachine {
         christmasEvent = new ChristmasEvent(EventName.CHRISTMAS_EVENT.getEventName(), 0);
         weekdayEvent = new WeekdayEvent(EventName.WEEKDAY_EVENT.getEventName(), 0);
         weekendEvent = new WeekendEvent(EventName.WEEKEND_EVENT.getEventName(), 0);
+        specialEvent = new SpecialEvent(EventName.SPECIAL_EVENT.getEventName(), 0);
     }
 
     public void getEventStatus(int date) {
@@ -29,6 +31,7 @@ public class EventMachine {
                 , weekdayEvent.getWeekdayDiscount(date, getDessertCount(orderMachine.getOrderBoard()))));
         eventTable.add(new Event(EventName.WEEKEND_EVENT.getEventName()
                 , weekendEvent.getWeekendDiscount(date, getMainCount(orderMachine.getOrderBoard()))));
+        eventTable.add(new Event(EventName.SPECIAL_EVENT.getEventName(), specialEvent.getSpecialEventDiscount(date)));
     }
 
     private int getDessertCount(List<Order> orderBoard) {
