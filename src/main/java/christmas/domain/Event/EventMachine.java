@@ -23,7 +23,7 @@ public class EventMachine {
 
     public void getEventStatus(int date) {
         eventTable.add(new Event(EventName.CHRISTMAS_EVENT.getEventName(), christmasEvent.getChristmasEvent(date)));
-        eventTable.add(new Event(EventName.CHRISTMAS_EVENT.getEventName()
+        eventTable.add(new Event(EventName.WEEKDAY_EVENT.getEventName()
                 , weekdayEvent.getWeekdayDiscount(date, getDessertCount(orderMachine.getOrderBoard()))));
     }
 
