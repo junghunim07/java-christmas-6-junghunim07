@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventMachine {
-    private List<Event> eventTable;
+    private final List<Event> eventTable;
     private ChristmasEvent christmasEvent;
     private WeekdayEvent weekdayEvent;
     private WeekendEvent weekendEvent;

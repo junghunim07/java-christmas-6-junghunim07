@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class OrderMachine {
     private static final int MAXIMUM_ORDER_COUNT = 20;
-    private List<Order> OrderBoard;
+    private final List<Order> OrderBoard;
     private int TotalPaymentAmount = 0;
 
     public OrderMachine() {
