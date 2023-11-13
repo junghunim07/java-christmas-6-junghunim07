@@ -11,17 +11,19 @@ public class ChristmasEvent {
         this.discount = discount;
     }
 
-    public int getChristmasEvent(int date) {
-        if (christmasValidation(date)) {
+    public int getChristmasEvent(int date, int totalPrice) {
+        if (christmasValidation(date, totalPrice)) {
             discount = getChristmasTotalDiscount(date);
         }
         return discount;
     }
 
-    private boolean christmasValidation(int date) {
-        if (date >= EventName.CHRISTMAS_EVENT.getEventStartDate() &&
-            date <= EventName.CHRISTMAS_EVENT.getEventFinishDate()) {
-            return true;
+    private boolean christmasValidation(int date, int totalPrice) {
+        if (date >= EventName.CHRISTMAS_EVENT.getEventStartDate()
+                && date <= EventName.CHRISTMAS_EVENT.getEventFinishDate()) {
+            if (totalPrice >= EventMachine.EVENT_APPLICATION_CRITERIA) {
+                return true;
+            }
         }
         return false;
     }

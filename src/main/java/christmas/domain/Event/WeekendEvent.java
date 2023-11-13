@@ -14,16 +14,15 @@ public class WeekendEvent {
         this.discount = discount;
     }
 
-    public int getWeekendDiscount(int date, int count) {
-        if (weekendValidation(date)) {
+    public int getWeekendDiscount(int date, int count, int totalPrice) {
+        if (weekendValidation(date, totalPrice)) {
             discount = BENEFIT_AMOUNT * count;
         }
         return discount;
     }
 
-    private boolean weekendValidation(int date) {
-        if (date >= EventName.WEEKEND_EVENT.getEventStartDate()
-                && date <= EventName.WEEKEND_EVENT.getEventFinishDate()) {
+    private boolean weekendValidation(int date, int totalPrice) {
+        if (totalPrice >= EventMachine.EVENT_APPLICATION_CRITERIA) {
             if ((date % WEEK) == FRIDAY || (date % WEEK) == SATURDAY) {
                 return true;
             }

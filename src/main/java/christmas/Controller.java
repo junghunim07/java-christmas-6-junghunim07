@@ -50,7 +50,7 @@ public class Controller {
     }
 
     public void getEventDetail() {
-        eventMachine.getEventStatus(orderMachine, date);
+        eventMachine.getEventStatus(orderMachine, date, orderMachine.getTotalPaymentAmount());
         checkGiftEvent(eventMachine.getEventTable());
         printEventDetail();
         output.notifyAllAmountOfBenefit(eventMachine.getTotalDiscount());

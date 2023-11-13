@@ -13,19 +13,19 @@ public class SpecialEvent {
         this.discount = discount;
     }
 
-    public int getSpecialEventDiscount(int date) {
-        if (specialEventValidation(date)) {
+    public int getSpecialEventDiscount(int date, int totalPrice) {
+        if (specialEventValidation(date, totalPrice)) {
             discount = SPECIAL_EVENT_BENEFIT;
         }
         return discount;
     }
 
-    private boolean specialEventValidation(int date) {
-        if (date >= EventName.SPECIAL_EVENT.getEventStartDate()
-                && date <= EventName.SPECIAL_EVENT.getEventFinishDate()) {
+    private boolean specialEventValidation(int date, int totalPrice) {
+        if (totalPrice >= EventMachine.EVENT_APPLICATION_CRITERIA) {
             if ((date % WEEK) == STAR_DAY || date == CHRISTMAS_DAY) {
                 return true;
             }
+            return false;
         }
         return false;
     }

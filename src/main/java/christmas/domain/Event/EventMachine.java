@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventMachine {
+    static final int EVENT_APPLICATION_CRITERIA = 10_000;
     private final List<Event> eventTable;
     private ChristmasEvent christmasEvent;
     private WeekdayEvent weekdayEvent;
@@ -25,13 +26,13 @@ public class EventMachine {
         giftEvent = new GiftEvent(EventName.GIFT_EVENT.getEventName(), 0);
     }
 
-    public void getEventStatus(OrderMachine orderMachine, int date) {
-        eventTable.add(new Event(EventName.CHRISTMAS_EVENT.getEventName(), christmasEvent.getChristmasEvent(date)));
+    public void getEventStatus(OrderMachine orderMachine, int date, int totalPrice) {
+        eventTable.add(new Event(EventName.CHRISTMAS_EVENT.getEventName(), christmasEvent.getChristmasEvent(date, totalPrice)));
         eventTable.add(new Event(EventName.WEEKDAY_EVENT.getEventName()
-                , weekdayEvent.getWeekdayDiscount(date, getDessertCount(orderMachine.getOrderBoard()))));
+                , weekdayEvent.getWeekdayDiscount(date, getDessertCount(orderMachine.getOrderBoard()), totalPrice)));
         eventTable.add(new Event(EventName.WEEKEND_EVENT.getEventName()
-                , weekendEvent.getWeekendDiscount(date, getMainCount(orderMachine.getOrderBoard()))));
-        eventTable.add(new Event(EventName.SPECIAL_EVENT.getEventName(), specialEvent.getSpecialEventDiscount(date)));
+                , weekendEvent.getWeekendDiscount(date, getMainCount(orderMachine.getOrderBoard()), totalPrice)));
+        eventTable.add(new Event(EventName.SPECIAL_EVENT.getEventName(), specialEvent.getSpecialEventDiscount(date, totalPrice)));
         eventTable.add(new Event(EventName.GIFT_EVENT.getEventName()
                 , giftEvent.getGiftEventDiscount(orderMachine.getTotalPaymentAmount(), MenuName.CHAMPAGNE.getPrice())));
         removeNotApplicableEvent();

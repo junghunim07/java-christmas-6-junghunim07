@@ -18,8 +18,11 @@ public class GiftEvent {
     }
 
     private boolean giftEventValidation(int totalPrice) {
-        if (totalPrice >= LIMIT_LINE) {
-            return true;
+        if (totalPrice >= EventMachine.EVENT_APPLICATION_CRITERIA) {
+            if (totalPrice >= LIMIT_LINE) {
+                return true;
+            }
+            return false;
         }
         return false;
     }
