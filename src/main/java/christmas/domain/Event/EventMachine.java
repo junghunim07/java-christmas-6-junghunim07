@@ -13,24 +13,38 @@ public class EventMachine {
     private OrderMachine orderMachine;
     private ChristmasEvent christmasEvent;
     private WeekdayEvent weekdayEvent;
+    private WeekendEvent weekendEvent;
 
     public EventMachine() {
         eventTable = new ArrayList<>();
         orderMachine = new OrderMachine();
         christmasEvent = new ChristmasEvent(EventName.CHRISTMAS_EVENT.getEventName(), 0);
         weekdayEvent = new WeekdayEvent(EventName.WEEKDAY_EVENT.getEventName(), 0);
+        weekendEvent = new WeekendEvent(EventName.WEEKEND_EVENT.getEventName(), 0);
     }
 
     public void getEventStatus(int date) {
         eventTable.add(new Event(EventName.CHRISTMAS_EVENT.getEventName(), christmasEvent.getChristmasEvent(date)));
         eventTable.add(new Event(EventName.WEEKDAY_EVENT.getEventName()
                 , weekdayEvent.getWeekdayDiscount(date, getDessertCount(orderMachine.getOrderBoard()))));
+        eventTable.add(new Event(EventName.WEEKEND_EVENT.getEventName()
+                , weekendEvent.getWeekendDiscount(date, getMainCount(orderMachine.getOrderBoard()))));
     }
 
     private int getDessertCount(List<Order> orderBoard) {
         int count = 0;
         for (MenuName menuName : MenuName.values()) {
             if (menuName.getCategory().equals(Category.DESSERT)) {
+                count = getOrderMenuCount(orderBoard, menuName);
+            }
+        }
+        return count;
+    }
+
+    private int getMainCount(List<Order> orderBoard) {
+        int count = 0;
+        for (MenuName menuName : MenuName.values()) {
+            if (menuName.getCategory().equals(Category.MAIN)) {
                 count = getOrderMenuCount(orderBoard, menuName);
             }
         }
