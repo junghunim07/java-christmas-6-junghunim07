@@ -38,10 +38,12 @@ public class OutputView {
         System.out.println(NOTIFY_GET_MENU_COUNT);
     }
 
-    public void notifyOrderMenu(HashMap<String, Integer> orderMenu) {
+
+    public void printOrderMenuTitle() {
         System.out.print(NOTIFY_ORDER_MENU);
-        orderMenu.forEach((key, value) -> System.out.println(key + SPACE + value + COUNT));
-        System.out.print(NEW_LINE);
+    }
+    public void notifyOrderMenu(String menu, int count) {
+        System.out.println(menu + SPACE + count + COUNT);
     }
 
     public void notifyPreview(int date) {
@@ -56,14 +58,16 @@ public class OutputView {
         System.out.println(NOTIFY_GIFT_MENU + gift + NEW_LINE);
     }
 
-    public void notifyBenefitDetail(HashMap<String, Integer> event) {
-        System.out.print(NOTIFY_BENEFIT_DETAIL);
-        event.forEach((key, value) -> System.out.println(key + " : " + MINUS + value + WON));
+    public void printBenefitDetailTitle() {
+        System.out.println("<혜택 내역>");
+    }
+
+    public void notifyBenefitDetail(String eventName, int discount) {
+        System.out.println(eventName + " : " + MINUS + discount + WON);
         System.out.print(NEW_LINE);
     }
 
     public void notifyNotBenefit(String event) {
-        System.out.println("<혜택 내역>");
         System.out.println(event + NEW_LINE);
     }
     

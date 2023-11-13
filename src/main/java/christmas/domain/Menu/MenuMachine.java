@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuMachine {
-    private List<Menu> MenuBoard;
+    public static List<Menu> MenuBoard;
 
     public MenuMachine() {
         MenuBoard = new ArrayList<>();
@@ -13,11 +13,7 @@ public class MenuMachine {
         }
     }
 
-    private void addMenu(String name, int price, Category category) {
+    private static void addMenu(String name, int price, Category category) {
         MenuBoard.add(new Menu(name, price, category));
-    }
-
-    public List<Menu> getMenuBoard() {
-        return MenuBoard;
     }
 }

@@ -1,24 +1,36 @@
 package christmas;
 
-import christmas.Event.EventManager;
-import christmas.domain.Calculator;
-import christmas.domain.ChristmasMenu;
-import christmas.domain.MenuMachine;
+import christmas.domain.Badge.BadgeMachine;
+import christmas.domain.Event.Event;
+import christmas.domain.Event.EventMachine;
+import christmas.domain.Event.EventName;
+import christmas.domain.Menu.Menu;
+import christmas.domain.Menu.MenuMachine;
+import christmas.domain.Menu.MenuName;
+import christmas.domain.Order.Order;
+import christmas.domain.Order.OrderMachine;
 import christmas.ui.InputView;
 import christmas.ui.OutputView;
+import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
+    int date;
     int giftPrice;
-    InputView input = new InputView();
-    OutputView output = new OutputView();
-    Calculator calculator = new Calculator();
-    EventManager eventManager = new EventManager();
-    MenuMachine menuMachine = new MenuMachine();
+    InputView input;
+    OutputView output;
+    OrderMachine orderMachine;
+    EventMachine eventMachine;
+    BadgeMachine badgeMachine;
+    private static MenuMachine menuMachine = new MenuMachine();
 
-    public static int date;
-    public static int totalPrice;
-    public static int totalDiscount;
+    Controller() {
+        input = new InputView();
+        output = new OutputView();
+        orderMachine = new OrderMachine();
+        eventMachine = new EventMachine();
+        badgeMachine = new BadgeMachine();
+    }
 
     public void christmasPlannerStart() {
         output.notifyExplanation();
@@ -30,49 +42,68 @@ public class Controller {
     public void getMenuStart() {
         output.notifyGetMenu();
         output.notifyPreview(date);
-        List<String> menus = input.getMenu();
-        menuMachine.transform(menus);
-        output.notifyOrderMenu(menuMachine.getMenuBoard());
-        totalPrice = calculator.getTotalPrice(menuMachine.getMenuBoard());
-        output.notifyPayment(totalPrice);
+        makeOrderBoard();
+        callOutputForPrintOrderMenu(orderMachine.getOrderBoard());
+        orderMachine.calculateTotalPayment();
+        output.notifyPayment(orderMachine.getTotalPaymentAmount());
     }
 
     public void getEventDetail() {
-        checkGift();
-        eventManager.getMakeEventTable(menuMachine);
-        totalDiscount = calculator.getTotalDiscount(eventManager.getEventTable());
+        eventMachine.getEventStatus(orderMachine, date);
+        checkGiftEvent(eventMachine.getEventTable());
         printEventDetail();
-        output.notifyAllAmountOfBenefit(totalDiscount);
-        output.notifyAmountOfPayment(calculator.calculateAmountOfPayment(giftPrice));
+        output.notifyAllAmountOfBenefit(eventMachine.getTotalDiscount());
+        output.notifyAmountOfPayment(calculateAmountOfPayment());
     }
 
     public void getBadge() {
-        output.notifyBadge(Badge.getBadgeName(totalDiscount));
+        output.notifyBadge(badgeMachine.showBadgeName(eventMachine.getTotalDiscount()));
+    }
+
+    private void makeOrderBoard() {
+        HashMap<String, Integer> menus = input.getMenu();
+        for (String key : menus.keySet()) {
+            orderMachine.addOrderMenu(key, menus.get(key));
+        }
+    }
+
+    private void callOutputForPrintOrderMenu(List<Order> orderBoard) {
+        output.printOrderMenuTitle();
+        for (Order order : orderBoard) {
+            output.notifyOrderMenu(order.getOrderMenuName(), order.getOrderCount());
+        }
+    }
+
+    private void checkGiftEvent(List<Event> eventTable) {
+        for (Event event : eventTable) {
+            if (event.getEventName().equals(EventName.GIFT_EVENT.getEventName())) {
+                giftPrice = MenuName.CHAMPAGNE.getPrice();
+                output.notifyGiftMenu(MenuName.CHAMPAGNE.getMenuName() + OutputView.SPACE +"1" + OutputView.COUNT);
+            }
+        }
+        output.notifyGiftMenu(OutputView.NOTHING);
     }
 
     private void printEventDetail() {
-        if (eventManager.getEventTable().isEmpty()) {
+        if (eventMachine.getTotalDiscount() == 0) {
+            output.printBenefitDetailTitle();
             output.notifyNotBenefit(OutputView.NOTHING);
         }
-        if (!eventManager.getEventTable().isEmpty()) {
-            output.notifyBenefitDetail(eventManager.getEventTable());
-        }
-    }
-
-    private void checkGift() {
-        if (totalPrice < EventManager.LIMIT_LINE) {
-            giftPrice = 0;
-            output.notifyGiftMenu(OutputView.NOTHING);
-        }
-        if (totalPrice >= EventManager.LIMIT_LINE) {
-            giftPrice = ChristmasMenu.CHAMPAGNE.getPrice();
-            output.notifyGiftMenu(ChristmasMenu.CHAMPAGNE.getName() + OutputView.SPACE + "1" + OutputView.COUNT);
+        if (eventMachine.getTotalDiscount() != 0) {
+            output.printBenefitDetailTitle();
+            for (Event event : eventMachine.getEventTable()) {
+                output.notifyBenefitDetail(event.getEventName(), event.getDiscount());
+            }
         }
     }
 
     public void inputValueValidation(int date) {
-        if (date < EventManager.DECEMBER_START || date > EventManager.DECEMBER_LAST) {
+        if (date < 1 || date > 31) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_DATE_ERROR);
         }
+    }
+
+    private int calculateAmountOfPayment() {
+        return orderMachine.getTotalPaymentAmount() - eventMachine.getTotalDiscount() + giftPrice;
     }
 }

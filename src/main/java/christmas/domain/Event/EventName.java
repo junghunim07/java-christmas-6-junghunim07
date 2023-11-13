@@ -1,6 +1,6 @@
 package christmas.domain.Event;
 
-enum EventName {
+public enum EventName {
     CHRISTMAS_EVENT("크리스마스 디데이 할인", 1, 25),
     WEEKDAY_EVENT("평일 할인", 1, 31),
     WEEKEND_EVENT("주말 할인", 1, 31),
