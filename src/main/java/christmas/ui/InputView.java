@@ -1,8 +1,7 @@
 package christmas.ui;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class InputView {
     public int getVisitDate() {
@@ -14,14 +13,15 @@ public class InputView {
         }
     }
 
-    public List<String> getMenu() {
-        List<String> input = new ArrayList<>();
+    public HashMap<String, Integer> getMenu() {
+        HashMap<String, Integer> menu = new HashMap<>();
         try {
-            String[] menus = Console.readLine().split("-|,");
-            for (int i = 0 ; i < menus.length; i++) {
-                input.add(menus[i]);
+            String[] input = Console.readLine().split(",");
+            for (String splitInput : input) {
+                String[] orderMenu = splitInput.split("-");
+                menu.put(orderMenu[0], Integer.parseInt(orderMenu[1]));
             }
-            return input;
+            return menu;
         }catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
