@@ -1,7 +1,8 @@
 package christmas.domain.Event;
 
-import christmas.domain.Menu.Category;
-import christmas.domain.Menu.MenuName;
+import christmas.domain.Menu.Beverage;
+import christmas.domain.Menu.Dessert;
+import christmas.domain.Menu.Main;
 import christmas.domain.Order.Order;
 import christmas.domain.Order.OrderMachine;
 import java.util.ArrayList;
@@ -34,27 +35,23 @@ public class EventMachine {
                 , weekendEvent.getWeekendDiscount(date, getMainCount(orderMachine.getOrderBoard()), totalPrice)));
         eventTable.add(new Event(EventName.SPECIAL_EVENT.getEventName(), specialEvent.getSpecialEventDiscount(date, totalPrice)));
         eventTable.add(new Event(EventName.GIFT_EVENT.getEventName()
-                , giftEvent.getGiftEventDiscount(orderMachine.getTotalPaymentAmount(), MenuName.CHAMPAGNE.getPrice())));
+                , giftEvent.getGiftEventDiscount(orderMachine.getTotalPaymentAmount(), Beverage.샴페인.getPrice())));
         removeNotApplicableEvent();
         calculateTotalDiscount();
     }
 
     private int getDessertCount(List<Order> orderBoard) {
         int count = 0;
-        for (MenuName menuName : MenuName.values()) {
-            if (menuName.getCategory().equals(Category.DESSERT)) {
-                count += getOrderMenuCount(orderBoard, menuName.getMenuName());
-            }
+        for (Dessert dessert : Dessert.values()) {
+            count += getOrderMenuCount(orderBoard, dessert.name());
         }
         return count;
     }
 
     private int getMainCount(List<Order> orderBoard) {
         int count = 0;
-        for (MenuName menuName : MenuName.values()) {
-            if (menuName.getCategory().equals(Category.MAIN)) {
-                count += getOrderMenuCount(orderBoard, menuName.getMenuName());
-            }
+        for (Main main : Main.values()) {
+            count += getOrderMenuCount(orderBoard, main.name());
         }
         return count;
     }

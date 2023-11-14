@@ -1,6 +1,7 @@
 package christmas.domain.Order;
 
-import christmas.domain.Menu.MenuName;
+import christmas.domain.Menu.Menu;
+import christmas.domain.Menu.MenuMachine;
 
 public class Order {
     private String orderMenuName;
@@ -21,9 +22,9 @@ public class Order {
 
     public static int getPayment(Order order) {
         int payment = 0;
-        for (MenuName menuName : MenuName.values()) {
-            if (menuName.getMenuName().equals(order.getOrderMenuName())) {
-                payment = menuName.getPrice() * order.getOrderCount();
+        for (Menu menu : MenuMachine.MenuBoard) {
+            if (menu.getName().equals(order.getOrderMenuName())) {
+                payment = menu.getPrice() * order.orderCount;
             }
         }
         return payment;

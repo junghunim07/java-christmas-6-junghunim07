@@ -1,25 +1,19 @@
 package christmas.domain.Menu;
 
 public class Menu {
-    private String name;
+    private String menu;
     private int price;
-    private Category menuCategory;
 
-    Menu(String name, int price, Category menuCategory) {
-        this.name = name;
+    Menu(String menu, int price) {
+        this.menu = menu;
         this.price = price;
-        this.menuCategory = menuCategory;
     }
 
     public String getName() {
-        return name;
+        return menu;
     }
 
     public int getPrice() {
         return price;
-    }
-
-    public Category getMenuCategory() {
-        return menuCategory;
     }
 }

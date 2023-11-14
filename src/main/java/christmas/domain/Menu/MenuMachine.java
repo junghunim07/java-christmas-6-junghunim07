@@ -8,12 +8,33 @@ public class MenuMachine {
 
     public MenuMachine() {
         MenuBoard = new ArrayList<>();
-        for (MenuName menu : MenuName.values()) {
-            addMenu(menu.getMenuName(), menu.getPrice(), menu.getCategory());
+        addAppetizerMenu();
+        addMainMenu();
+        addDessertMenu();
+        addBeverageMenu();
+    }
+
+    private static void addAppetizerMenu() {
+        for (Appetizer appetizer : Appetizer.values()) {
+            MenuBoard.add(new Menu(appetizer.name(), appetizer.getPrice()));
         }
     }
 
-    private static void addMenu(String name, int price, Category category) {
-        MenuBoard.add(new Menu(name, price, category));
+    private static void addMainMenu() {
+        for (Main main : Main.values()) {
+            MenuBoard.add(new Menu(main.name(), main.getPrice()));
+        }
+    }
+
+    private static void addDessertMenu() {
+        for (Dessert dessert : Dessert.values()) {
+            MenuBoard.add(new Menu(dessert.name(), dessert.getPrice()));
+        }
+    }
+
+    private static void addBeverageMenu() {
+        for (Beverage beverage : Beverage.values()) {
+            MenuBoard.add(new Menu(beverage.name(), beverage.getPrice()));
+        }
     }
 }

@@ -4,8 +4,8 @@ import christmas.domain.Badge.BadgeMachine;
 import christmas.domain.Event.Event;
 import christmas.domain.Event.EventMachine;
 import christmas.domain.Event.EventName;
+import christmas.domain.Menu.Beverage;
 import christmas.domain.Menu.MenuMachine;
-import christmas.domain.Menu.MenuName;
 import christmas.domain.Order.Order;
 import christmas.domain.Order.OrderMachine;
 import christmas.ui.InputView;
@@ -78,8 +78,8 @@ public class Controller {
     private void checkGiftEvent(List<Event> eventTable) {
         for (Event event : eventTable) {
             if (event.getEventName().equals(EventName.GIFT_EVENT.getEventName())) {
-                giftPrice = MenuName.CHAMPAGNE.getPrice();
-                output.notifyGiftMenu(MenuName.CHAMPAGNE.getMenuName() + OutputView.SPACE +"1" + OutputView.COUNT);
+                giftPrice = Beverage.샴페인.getPrice();
+                output.notifyGiftMenu(Beverage.샴페인.name() + OutputView.SPACE +"1" + OutputView.COUNT);
             }
         }
         output.notifyGiftMenu(OutputView.NOTHING);
