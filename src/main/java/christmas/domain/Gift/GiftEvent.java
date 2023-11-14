@@ -17,7 +17,7 @@ public class GiftEvent {
 
     public void calculateDiscount(int totalPrice) {
         if (totalPrice >= GIFT_EVENT_LIMIT_LINE) {
-            discount = Beverage.샴페인.getPrice();
+            discount = Beverage.CHAMPAGNE.getPrice();
         }
     }
 }

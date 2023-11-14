@@ -99,7 +99,7 @@ public class Controller {
             output.notifyGiftMenu(OutputView.NOTHING);
         }
         if (giftEvent.getDiscount() > 0) {
-            output.notifyGiftMenu(Beverage.샴페인.name() + OutputView.SPACE + "1" + OutputView.COUNT);
+            output.notifyGiftMenu(Beverage.CHAMPAGNE.getName() + OutputView.SPACE + "1" + OutputView.COUNT);
         }
     }
 

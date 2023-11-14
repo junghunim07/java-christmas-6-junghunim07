@@ -42,7 +42,7 @@ public class Order {
 
     private boolean checkDessertMenu(String orderMenuName) {
         for (Dessert dessert : Dessert.values()) {
-            if (dessert.name().equals(orderMenuName)) {
+            if (dessert.getName().equals(orderMenuName)) {
                 return true;
             }
         }
@@ -59,7 +59,7 @@ public class Order {
 
     private boolean checkMainMenu(String orderMenuName) {
         for (Main main : Main.values()) {
-            if (main.name().equals(orderMenuName)) {
+            if (main.getName().equals(orderMenuName)) {
                 return true;
             }
         }

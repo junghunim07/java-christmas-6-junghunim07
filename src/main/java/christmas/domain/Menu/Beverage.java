@@ -1,7 +1,21 @@
 package christmas.domain.Menu;
 
 public enum Beverage {
-    제로콜라(3000), 레드와인(60000), 샴페인(25000);
+    ZERO_COLA(3000) {
+        public String getName() {
+            return "제로콜라";
+        }
+    },
+    RED_WINE(60000) {
+        public String getName() {
+            return "레드와인";
+        }
+    },
+    CHAMPAGNE(25000) {
+        public String getName() {
+            return "샴페인";
+        }
+    };
 
     private final int price;
 
@@ -12,4 +26,6 @@ public enum Beverage {
     public int getPrice() {
         return price;
     }
+
+    public abstract String getName();
 }

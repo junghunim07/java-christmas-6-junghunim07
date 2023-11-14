@@ -1,7 +1,21 @@
 package christmas.domain.Menu;
 
 public enum Appetizer {
-    양송이수프(6000), 타파스(5500), 시저샐러드(8000);
+    MUSHROOM_SOUP(6000) {
+        public String getName() {
+            return "양송이수프";
+        }
+    },
+    TAPAS(5500) {
+        public String getName() {
+            return "타파스";
+        }
+    },
+    CAESAR_SALAD(8000) {
+        public String getName() {
+            return "시저샐러드";
+        }
+    };
 
     private final int price;
 
@@ -12,4 +26,6 @@ public enum Appetizer {
     public int getPrice() {
         return price;
     }
+
+    public abstract String getName();
 }
