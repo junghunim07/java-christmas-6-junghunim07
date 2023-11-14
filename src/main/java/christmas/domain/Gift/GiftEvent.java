@@ -8,14 +8,17 @@ public class GiftEvent {
     private static final int GIFT_EVENT_LIMIT_LINE = 120_000;
     private int discount = 0;
 
-    public int getDiscount(int totalPrice) {
-        if (totalPrice >= GIFT_EVENT_LIMIT_LINE) {
-            discount = Beverage.샴페인.getPrice();
-        }
+    public int getDiscount() {
         return discount;
     }
 
     public String getEventName() {
         return EVENT_NAME;
+    }
+
+    public void calculateDiscount(int totalPrice) {
+        if (totalPrice >= GIFT_EVENT_LIMIT_LINE) {
+            discount = Beverage.샴페인.getPrice();
+        }
     }
 }
