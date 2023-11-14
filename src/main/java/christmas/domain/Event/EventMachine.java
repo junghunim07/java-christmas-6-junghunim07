@@ -18,7 +18,7 @@ public class EventMachine {
     }
 
     public void getEventStatus(int date, int menuCount) {
-        eventTable.add(new Event(christmasEvent.getChristmasNameEventName(), christmasEvent.getChristmasEventDiscount(date)));
+        eventTable.add(new Event(christmasEvent.getEventName(), christmasEvent.getChristmasEventDiscount(date)));
         eventTable.add(new Event(weekEvent.getEventName(), weekEvent.getWeekEventDiscount(date, menuCount)));
         eventTable.add(new Event(specialEvent.getEventName(), specialEvent.getSpecialEventDiscount(date)));
         removeNotApplicableEvent();
