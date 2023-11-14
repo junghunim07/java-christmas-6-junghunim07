@@ -23,9 +23,8 @@ public class SpecialEvent {
     }
 
     private boolean specialEventValidation(int date) {
-        if ((date % Calendar.ONW_WEEK.getDate()) == Calendar.SUNDAY.getDate()
-                || (date % Calendar.ONW_WEEK.getDate()) == Calendar.CHRISTMAS.getDate()) {
-            return true;
+        if (Calendar.checkStarDay(date)) {
+            return false;
         }
         return false;
     }

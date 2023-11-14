@@ -15,14 +15,14 @@ public enum Calendar {
         return date;
     }
 
-    public static boolean getDayOfWeek(int date) {
+    public static boolean checkWeekdayOrWeekend(int date) {
         if (date % ONW_WEEK.date == FRIDAY.date || date % ONW_WEEK.date == SATURDAY.date) {
             return true;
         }
         return false;
     }
 
-    public static boolean getStarDay(int date) {
+    public static boolean checkStarDay(int date) {
         if (date % ONW_WEEK.date == SUNDAY.date || date % ONW_WEEK.date == CHRISTMAS.date) {
             return true;
         }

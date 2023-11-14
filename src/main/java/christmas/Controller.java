@@ -83,7 +83,7 @@ public class Controller {
     }
 
     private int decideOrderMachineAboutDessertCountOrMainCount(int date) {
-        if (Calendar.getDayOfWeek(date)) {
+        if (Calendar.checkWeekdayOrWeekend(date)) {
             return orderMachine.getOrderMainMenuCount();
         }
         return orderMachine.getOrderDessertMenuCount();
