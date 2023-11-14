@@ -21,4 +21,11 @@ public enum Calendar {
         }
         return false;
     }
+
+    public static boolean getStarDay(int date) {
+        if (date % ONW_WEEK.date == SUNDAY.date || date % ONW_WEEK.date == CHRISTMAS.date) {
+            return true;
+        }
+        return false;
+    }
 }
