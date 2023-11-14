@@ -51,10 +51,10 @@ public class Controller {
 
     public void getEventDetail() {
         checkEventValidation(orderMachine.getTotalPaymentAmount());
-        checkGiftEvent(eventMachine.getEventTable());
-        printEventDetail();
+        callOutputAboutGiftEvent(orderMachine.getTotalPaymentAmount());
+        callOutputForEventDetail();
         output.notifyAllAmountOfBenefit(eventMachine.getTotalDiscount());
-        output.notifyAmountOfPayment(calculateAmountOfPayment());
+        output.notifyAmountOfPayment(calculateAmountOfPayment(orderMachine.getTotalPaymentAmount()));
     }
 
     public void getBadge() {
@@ -81,17 +81,16 @@ public class Controller {
         }
     }
 
-    private void checkGiftEvent(List<Event> eventTable) {
-        for (Event event : eventTable) {
-            if (event.getEventName().equals(EventName.GIFT_EVENT.getEventName())) {
-                giftPrice = Beverage.샴페인.getPrice();
-                output.notifyGiftMenu(Beverage.샴페인.name() + OutputView.SPACE +"1" + OutputView.COUNT);
-            }
+    private void callOutputAboutGiftEvent(int totalPrice) {
+        if (giftEvent.getDiscount(totalPrice) == 0) {
+            output.notifyGiftMenu(OutputView.NOTHING);
         }
-        output.notifyGiftMenu(OutputView.NOTHING);
+        if (giftEvent.getDiscount(totalPrice) > 0) {
+            output.notifyGiftMenu(Beverage.샴페인.name() + OutputView.SPACE + "1" + OutputView.COUNT);
+        }
     }
 
-    private void printEventDetail() {
+    private void callOutputForEventDetail() {
         if (eventMachine.getTotalDiscount() == 0) {
             output.printBenefitDetailTitle();
             output.notifyNotBenefit(OutputView.NOTHING);
@@ -111,7 +110,7 @@ public class Controller {
         }
     }
 
-    private int calculateAmountOfPayment() {
-        return orderMachine.getTotalPaymentAmount() - eventMachine.getTotalDiscount() + giftPrice;
+    private int calculateAmountOfPayment(int totalPrice) {
+        return orderMachine.getTotalPaymentAmount() - eventMachine.getTotalDiscount() + giftEvent.getDiscount(totalPrice);
     }
 }
