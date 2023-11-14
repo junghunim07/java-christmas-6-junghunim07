@@ -78,7 +78,7 @@ public class Controller {
 
     private void checkEventValidation(int totalPrice) {
         if (totalPrice >= EVENT_APPLICATION_CRITERIA) {
-            eventMachine.getEventStatus(date, decideOrderMachineAboutDessertCountOrMainCount(date));
+            eventMachine.getEventStatus(orderMachine, date);
         }
     }
 
@@ -107,7 +107,6 @@ public class Controller {
             output.printBenefitDetailTitle();
             for (Event event : eventMachine.getEventTable()) {
                 output.notifyBenefitDetail(event.getEventName(), event.getDiscount());
-                System.out.println(event.getEventName());
             }
             output.notifyBenefitDetail(giftEvent.getEventName(), giftEvent.getDiscount());
         }

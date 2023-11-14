@@ -24,7 +24,7 @@ public class SpecialEvent {
 
     private boolean specialEventValidation(int date) {
         if (Calendar.checkStarDay(date)) {
-            return false;
+            return true;
         }
         return false;
     }
