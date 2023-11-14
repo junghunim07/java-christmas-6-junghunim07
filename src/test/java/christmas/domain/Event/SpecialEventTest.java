@@ -12,19 +12,19 @@ class SpecialEventTest {
 
     @BeforeEach
     void setUp() {
-        specialEvent = new SpecialEvent("특별 할인", 0);
+        specialEvent = new SpecialEvent(0);
     }
 
     @DisplayName("특별 할인 금액 테스트")
     @Test
     void getSpecialEventDiscount() {
         int expectedResult = 1000;
-        assertThat(specialEvent.getSpecialEventDiscount(3, 20000)).isEqualTo(expectedResult);
+        assertThat(specialEvent.getSpecialEventDiscount(3)).isEqualTo(expectedResult);
     }
 
     @DisplayName("총액이 만원을 넘지 않을 경우 테스트")
     @Test
     void lowTotalPriceAmountAboutSpecialEventTest() {
-        assertThat(specialEvent.getSpecialEventDiscount(3, 5000)).isEqualTo(0);
+        assertThat(specialEvent.getSpecialEventDiscount(3)).isEqualTo(0);
     }
 }

@@ -13,25 +13,19 @@ class ChristmasEventTest {
 
     @BeforeEach
     void setUp() {
-        christmasEvent = new ChristmasEvent("크리스마스 디데이 할인", 0);
+        christmasEvent = new ChristmasEvent(0);
     }
 
     @DisplayName("크리스마스 할인 가격 테스트")
     @ParameterizedTest(name = "{displayName} ({0}일)")
     @CsvSource({"13, 2200", "20, 2900"})
     void getChristmasEvent(int date, int expectedDiscount) {
-        assertThat(christmasEvent.getChristmasEvent(date, 20000)).isEqualTo(expectedDiscount);
+        assertThat(christmasEvent.getChristmasEventDiscount(date)).isEqualTo(expectedDiscount);
     }
 
     @DisplayName("크리스마스 이벤트 날이 아닐 경우 테스트")
     @Test
     void getChristmasNotEvent() {
-        assertThat(christmasEvent.getChristmasEvent(27, 20000)).isEqualTo(0);
-    }
-
-    @DisplayName("총액이 만원을 넘지 않을 경우 테스트")
-    @Test
-    void lowTotalPriceAmountAboutChristmasEventTest() {
-        assertThat(christmasEvent.getChristmasEvent(24, 5000)).isEqualTo(0);
+        assertThat(christmasEvent.getChristmasEventDiscount(27)).isEqualTo(0);
     }
 }

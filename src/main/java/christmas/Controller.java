@@ -1,9 +1,9 @@
 package christmas;
 
 import christmas.domain.Badge.Badge;
+import christmas.domain.Event.Calendar;
 import christmas.domain.Event.Event;
 import christmas.domain.Event.EventMachine;
-import christmas.domain.Event.EventName;
 import christmas.domain.Menu.Beverage;
 import christmas.domain.Menu.MenuMachine;
 import christmas.domain.Order.Order;
@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
+    private static final int EVENT_APPLICATION_CRITERIA = 10_000;
     int date;
     int giftPrice;
     InputView input;
@@ -48,7 +49,7 @@ public class Controller {
     }
 
     public void getEventDetail() {
-        eventMachine.getEventStatus(orderMachine, date, orderMachine.getTotalPaymentAmount());
+        checkEventValidation(orderMachine.getTotalPaymentAmount());
         checkGiftEvent(eventMachine.getEventTable());
         printEventDetail();
         output.notifyAllAmountOfBenefit(eventMachine.getTotalDiscount());
@@ -70,6 +71,12 @@ public class Controller {
         output.printOrderMenuTitle();
         for (Order order : orderBoard) {
             output.notifyOrderMenu(order.getOrderMenuName(), order.getOrderCount());
+        }
+    }
+
+    private void checkEventValidation(int totalPrice) {
+        if (totalPrice >= EVENT_APPLICATION_CRITERIA) {
+            eventMachine.getEventStatus(date);
         }
     }
 
@@ -97,7 +104,8 @@ public class Controller {
     }
 
     public void inputValueValidation(int date) {
-        if (date < 1 || date > 31) {
+        if (date < Calendar.DECEMBER_FIRST.getDate()
+                || date > Calendar.DECEMBER_LAST.getDate()) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_DATE_ERROR);
         }
     }

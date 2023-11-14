@@ -6,24 +6,27 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class WeekdayEventTest {
-    WeekdayEvent weekdayEvent;
+class WeekEventTest {
+    WeekEvent weekEvent;
 
     @BeforeEach
     void setUp() {
-        weekdayEvent = new WeekdayEvent("평일 할인", 0);
+        weekEvent = new WeekEvent(0);
     }
 
     @DisplayName("평일 할인 금액 계산 테스트")
     @Test
     void getWeekdayDiscount() {
         int expectedResult = 6069;
-        assertThat(weekdayEvent.getWeekdayDiscount(7, 3, 20000)).isEqualTo(expectedResult);
+        assertThat(weekEvent.getWeekEventDiscount(7, 3)).isEqualTo(expectedResult);
     }
 
-    @DisplayName("총액이 만원을 넘지 않을 경우 테스트")
+
+
+    @DisplayName("주말 할인 금액 계산 테스트")
     @Test
-    void lowTotalPriceAmountAboutWeekdayEvent() {
-        assertThat(weekdayEvent.getWeekdayDiscount(7, 3, 5000)).isEqualTo(0);
+    void getWeekendDiscount() {
+        int expectedResult = 4046;
+        assertThat(weekEvent.getWeekEventDiscount(1, 2)).isEqualTo(expectedResult);
     }
 }

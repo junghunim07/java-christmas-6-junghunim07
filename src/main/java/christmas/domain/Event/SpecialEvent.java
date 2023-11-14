@@ -1,31 +1,31 @@
 package christmas.domain.Event;
 
+import christmas.Controller;
+
 public class SpecialEvent {
-    private static final int STAR_DAY = 3;
-    private static final int CHRISTMAS_DAY = 25;
-    private static final int WEEK = 7;
     private static final int SPECIAL_EVENT_BENEFIT = 1000;
-    private String eventName;
+    private static final String eventName = "특별 할인";
     private int discount;
 
-    SpecialEvent(String eventName, int discount) {
-        this.eventName = eventName;
+    SpecialEvent(int discount) {
         this.discount = discount;
     }
 
-    public int getSpecialEventDiscount(int date, int totalPrice) {
-        if (specialEventValidation(date, totalPrice)) {
+    public String getEventName() {
+        return eventName;
+    }
+
+    public int getSpecialEventDiscount(int date) {
+        if (specialEventValidation(date)) {
             discount = SPECIAL_EVENT_BENEFIT;
         }
         return discount;
     }
 
-    private boolean specialEventValidation(int date, int totalPrice) {
-        if (totalPrice >= EventMachine.EVENT_APPLICATION_CRITERIA) {
-            if ((date % WEEK) == STAR_DAY || date == CHRISTMAS_DAY) {
-                return true;
-            }
-            return false;
+    private boolean specialEventValidation(int date) {
+        if ((date % Calendar.ONW_WEEK.getDate()) == Calendar.SUNDAY.ordinal()
+                || (date % Calendar.ONW_WEEK.getDate()) == Calendar.CHRISTMAS.getDate()) {
+            return true;
         }
         return false;
     }
