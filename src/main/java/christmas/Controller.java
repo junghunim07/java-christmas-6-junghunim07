@@ -78,7 +78,12 @@ public class Controller {
 
     private void checkEventValidation(int totalPrice) {
         if (totalPrice >= EVENT_APPLICATION_CRITERIA) {
-            eventMachine.getEventStatus(orderMachine, date);
+            if (Calendar.checkWeekdayOrWeekend(date)) {
+                eventMachine.getEventStatus(date, orderMachine.getOrderMainMenuCount());
+            }
+            if (!Calendar.checkWeekdayOrWeekend(date)) {
+                eventMachine.getEventStatus(date, orderMachine.getOrderDessertMenuCount());
+            }
         }
     }
 

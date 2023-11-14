@@ -1,10 +1,9 @@
 package christmas.domain.Gift;
 
-import christmas.domain.Event.EventName;
 import christmas.domain.Menu.Beverage;
 
 public class GiftEvent {
-    private static final String EVENT_NAME = EventName.GIFT_EVENT.getEventName();
+    private static final String EVENT_NAME = "증정 이벤트";
     private static final int GIFT_EVENT_LIMIT_LINE = 120_000;
     private int discount = 0;
 
