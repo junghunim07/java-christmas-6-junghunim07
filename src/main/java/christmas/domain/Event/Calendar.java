@@ -14,4 +14,11 @@ public enum Calendar {
     public int getDate() {
         return date;
     }
+
+    public static boolean getDayOfWeek(int date) {
+        if (date % ONW_WEEK.date == FRIDAY.date || date % ONW_WEEK.date == SATURDAY.date) {
+            return true;
+        }
+        return false;
+    }
 }

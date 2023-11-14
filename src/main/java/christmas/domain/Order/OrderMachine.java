@@ -9,6 +9,8 @@ public class OrderMachine {
     private final List<Order> OrderBoard;
     private int TotalPaymentAmount = 0;
 
+    private int OrderMenuCount = 0;
+
     public OrderMachine() {
         OrderBoard = new ArrayList<>();
     }
@@ -34,7 +36,21 @@ public class OrderMachine {
         }
     }
 
-    private int countTotalOrderMenu() {
+    public int getOrderDessertMenuCount() {
+        for (Order order : OrderBoard) {
+            OrderMenuCount += order.getDessertCount();
+        }
+        return OrderMenuCount;
+    }
+
+    public int getOrderMainMenuCount() {
+        for (Order order : OrderBoard) {
+            OrderMenuCount += order.getMainCount();
+        }
+        return OrderMenuCount;
+    }
+
+    public int countTotalOrderMenu() {
         int count = 0;
         for (Order order : OrderBoard) {
             count += order.getOrderCount();
@@ -42,8 +58,8 @@ public class OrderMachine {
         return count;
     }
 
-    public void totalCountValidation() {
-        if (countTotalOrderMenu() > MAXIMUM_ORDER_COUNT) {
+    public void totalCountValidation(int totalCount) {
+        if (totalCount > MAXIMUM_ORDER_COUNT) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }

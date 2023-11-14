@@ -18,14 +18,14 @@ public class EventMachine {
     }
 
     public void getEventStatus(int date, int menuCount) {
-        eventTable.add(new Event(christmasEvent.getEventName(), christmasEvent.getChristmasEventDiscount(date)));
-        eventTable.add(new Event(weekEvent.getEventName(), weekEvent.getWeekEventDiscount(date, menuCount)));
-        eventTable.add(new Event(specialEvent.getEventName(), specialEvent.getSpecialEventDiscount(date)));
-        removeNotApplicableEvent();
+        eventTable.add(new Event(christmasEvent.getName(), christmasEvent.getChristmasEventDiscount(date)));
+        eventTable.add(new Event(weekEvent.getName(), weekEvent.getWeekEventDiscount(date, menuCount)));
+        eventTable.add(new Event(specialEvent.getName(), specialEvent.getSpecialEventDiscount(date)));
+        removeNotApplicableEventInEventTable();
         calculateTotalDiscount();
     }
 
-    private void removeNotApplicableEvent() {
+    private void removeNotApplicableEventInEventTable() {
         List<Event> toRemove = new ArrayList<>();
         for (Event event : eventTable) {
             if (event.getDiscount() == 0) {

@@ -19,13 +19,12 @@ public class WeekEvent {
         return discount;
     }
 
-    public String getEventName() {
+    public String getName() {
         return eventName;
     }
 
     private boolean checkWeekdayOrWeekend(int date) {
-        if ((date % Calendar.ONW_WEEK.getDate()) == Calendar.FRIDAY.ordinal()
-                || (date % Calendar.ONW_WEEK.getDate()) == Calendar.SUNDAY.ordinal()) {
+        if (Calendar.getDayOfWeek(date)) {
             eventName = EventName.WEEKEND_EVENT.getEventName();
             return true;
         }

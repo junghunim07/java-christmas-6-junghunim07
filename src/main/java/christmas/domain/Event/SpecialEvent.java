@@ -11,7 +11,7 @@ public class SpecialEvent {
         this.discount = discount;
     }
 
-    public String getEventName() {
+    public String getName() {
         return eventName;
     }
 
@@ -23,7 +23,7 @@ public class SpecialEvent {
     }
 
     private boolean specialEventValidation(int date) {
-        if ((date % Calendar.ONW_WEEK.getDate()) == Calendar.SUNDAY.ordinal()
+        if ((date % Calendar.ONW_WEEK.getDate()) == Calendar.SUNDAY.getDate()
                 || (date % Calendar.ONW_WEEK.getDate()) == Calendar.CHRISTMAS.getDate()) {
             return true;
         }

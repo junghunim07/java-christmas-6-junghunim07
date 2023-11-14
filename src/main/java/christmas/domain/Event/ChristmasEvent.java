@@ -10,7 +10,7 @@ public class ChristmasEvent {
         this.discount = discount;
     }
 
-    public String getEventName() {
+    public String getName() {
         return christmasName;
     }
 

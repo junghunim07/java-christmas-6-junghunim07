@@ -43,7 +43,7 @@ public class Controller {
         output.notifyGetMenu();
         output.notifyPreview(date);
         makeOrderBoard();
-        orderMachine.totalCountValidation();
+        orderMachine.totalCountValidation(orderMachine.countTotalOrderMenu());
         callOutputForPrintOrderMenu(orderMachine.getOrderBoard());
         orderMachine.calculateTotalPayment();
         output.notifyPayment(orderMachine.getTotalPaymentAmount());
@@ -51,14 +51,15 @@ public class Controller {
 
     public void getEventDetail() {
         checkEventValidation(orderMachine.getTotalPaymentAmount());
-        callOutputAboutGiftEvent(orderMachine.getTotalPaymentAmount());
+        giftEvent.calculateDiscount(orderMachine.getTotalPaymentAmount());
+        callOutputAboutGiftEvent();
         callOutputForEventDetail();
-        output.notifyAllAmountOfBenefit(eventMachine.getTotalDiscount());
-        output.notifyAmountOfPayment(calculateAmountOfPayment(orderMachine.getTotalPaymentAmount()));
+        output.notifyAllAmountOfBenefit(eventMachine.getTotalDiscount() + giftEvent.getDiscount());
+        output.notifyAmountOfPayment(calculateAmountOfPaymentAfterBenefit());
     }
 
     public void getBadge() {
-        output.notifyBadge(Badge.informBadgeName(eventMachine.getTotalDiscount()));
+        output.notifyBadge(Badge.informBadgeName(eventMachine.getTotalDiscount() + giftEvent.getDiscount()));
     }
 
     private void makeOrderBoard() {
@@ -77,15 +78,22 @@ public class Controller {
 
     private void checkEventValidation(int totalPrice) {
         if (totalPrice >= EVENT_APPLICATION_CRITERIA) {
-            eventMachine.getEventStatus(date, orderMachine.);
+            eventMachine.getEventStatus(date, decideOrderMachineAboutDessertCountOrMainCount(date));
         }
     }
 
-    private void callOutputAboutGiftEvent(int totalPrice) {
-        if (giftEvent.getDiscount(totalPrice) == 0) {
+    private int decideOrderMachineAboutDessertCountOrMainCount(int date) {
+        if (Calendar.getDayOfWeek(date)) {
+            return orderMachine.getOrderMainMenuCount();
+        }
+        return orderMachine.getOrderDessertMenuCount();
+    }
+
+    private void callOutputAboutGiftEvent() {
+        if (giftEvent.getDiscount() == 0) {
             output.notifyGiftMenu(OutputView.NOTHING);
         }
-        if (giftEvent.getDiscount(totalPrice) > 0) {
+        if (giftEvent.getDiscount() > 0) {
             output.notifyGiftMenu(Beverage.샴페인.name() + OutputView.SPACE + "1" + OutputView.COUNT);
         }
     }
@@ -99,7 +107,9 @@ public class Controller {
             output.printBenefitDetailTitle();
             for (Event event : eventMachine.getEventTable()) {
                 output.notifyBenefitDetail(event.getEventName(), event.getDiscount());
+                System.out.println(event.getEventName());
             }
+            output.notifyBenefitDetail(giftEvent.getEventName(), giftEvent.getDiscount());
         }
     }
 
@@ -110,7 +120,7 @@ public class Controller {
         }
     }
 
-    private int calculateAmountOfPayment(int totalPrice) {
-        return orderMachine.getTotalPaymentAmount() - eventMachine.getTotalDiscount() + giftEvent.getDiscount(totalPrice);
+    private int calculateAmountOfPaymentAfterBenefit() {
+        return orderMachine.getTotalPaymentAmount() - eventMachine.getTotalDiscount();
     }
 }
