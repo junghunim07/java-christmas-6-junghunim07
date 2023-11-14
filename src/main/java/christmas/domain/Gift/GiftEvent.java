@@ -14,4 +14,8 @@ public class GiftEvent {
         }
         return discount;
     }
+
+    public String getEventName() {
+        return EVENT_NAME;
+    }
 }

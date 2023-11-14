@@ -14,21 +14,19 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
-    private static final int EVENT_APPLICATION_CRITERIA = 10_000;
     int date;
-    int giftPrice;
     InputView input;
     OutputView output;
     OrderMachine orderMachine;
     EventMachine eventMachine;
-    MenuMachine menuMachine;
+    public static MenuMachine menuMachine = new MenuMachine();
+    private static final int EVENT_APPLICATION_CRITERIA = 10_000;
 
     Controller() {
         input = new InputView();
         output = new OutputView();
         orderMachine = new OrderMachine();
         eventMachine = new EventMachine();
-        menuMachine = new MenuMachine();
     }
 
     public void christmasPlannerStart() {
