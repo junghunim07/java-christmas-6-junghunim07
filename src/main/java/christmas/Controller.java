@@ -1,6 +1,6 @@
 package christmas;
 
-import christmas.domain.Badge.BadgeMachine;
+import christmas.domain.Badge.Badge;
 import christmas.domain.Event.Event;
 import christmas.domain.Event.EventMachine;
 import christmas.domain.Event.EventName;
@@ -20,7 +20,6 @@ public class Controller {
     OutputView output;
     OrderMachine orderMachine;
     EventMachine eventMachine;
-    BadgeMachine badgeMachine;
     MenuMachine menuMachine;
 
     Controller() {
@@ -28,7 +27,6 @@ public class Controller {
         output = new OutputView();
         orderMachine = new OrderMachine();
         eventMachine = new EventMachine();
-        badgeMachine = new BadgeMachine();
         menuMachine = new MenuMachine();
     }
 
@@ -58,7 +56,7 @@ public class Controller {
     }
 
     public void getBadge() {
-        output.notifyBadge(badgeMachine.showBadgeName(eventMachine.getTotalDiscount()));
+        output.notifyBadge(Badge.informBadgeName(eventMachine.getTotalDiscount()));
     }
 
     private void makeOrderBoard() {

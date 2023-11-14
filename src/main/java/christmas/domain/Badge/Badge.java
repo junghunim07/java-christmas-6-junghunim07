@@ -1,24 +1,28 @@
 package christmas.domain.Badge;
 
-enum Badge {
-    NOTHING(0, "없음"),
-    STAR(5_000, "별"),
-    TREE(10_000, "트리"),
-    SANTA(20_000, "산타");
+public enum Badge {
+    없음 (0),
+    별 (5000),
+    트리(10000),
+    산타(20000);
 
     private final int benefit;
-    private final String badgeName;
 
-    Badge(int benefit, String badgeName) {
+    Badge(int benefit) {
         this.benefit = benefit;
-        this.badgeName = badgeName;
     }
 
     public int getBenefit() {
         return benefit;
     }
 
-    public String getBadgeName() {
+    public static String informBadgeName(int userBenefit) {
+        String badgeName = "";
+        for (Badge badge : Badge.values()) {
+            if (userBenefit >= badge.getBenefit()) {
+                badgeName = badge.name();
+            }
+        }
         return badgeName;
     }
 }
