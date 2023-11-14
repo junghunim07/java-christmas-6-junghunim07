@@ -34,16 +34,25 @@ public class OrderMachine {
         }
     }
 
-    public void totalCountValidation(int totalCount) {
-        if (totalCount > MAXIMUM_ORDER_COUNT) {
+    private int countTotalOrderMenu() {
+        int count = 0;
+        for (Order order : OrderBoard) {
+            count += order.getOrderCount();
+        }
+        return count;
+    }
+
+    public void totalCountValidation() {
+        if (countTotalOrderMenu() > MAXIMUM_ORDER_COUNT) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }
 
-    public void calculateTotalPayment() {
+    public int calculateTotalPayment() {
         for (Order order : OrderBoard) {
             TotalPaymentAmount += Order.getPayment(order);
         }
+        return TotalPaymentAmount;
     }
 
     public int getTotalPaymentAmount() {

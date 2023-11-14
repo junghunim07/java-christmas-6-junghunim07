@@ -4,6 +4,7 @@ import christmas.domain.Badge.Badge;
 import christmas.domain.Event.Calendar;
 import christmas.domain.Event.Event;
 import christmas.domain.Event.EventMachine;
+import christmas.domain.Gift.GiftEvent;
 import christmas.domain.Menu.Beverage;
 import christmas.domain.Menu.MenuMachine;
 import christmas.domain.Order.Order;
@@ -17,6 +18,7 @@ public class Controller {
     int date;
     InputView input;
     OutputView output;
+    GiftEvent giftEvent;
     OrderMachine orderMachine;
     EventMachine eventMachine;
     public static MenuMachine menuMachine = new MenuMachine();
@@ -25,6 +27,7 @@ public class Controller {
     Controller() {
         input = new InputView();
         output = new OutputView();
+        giftEvent = new GiftEvent();
         orderMachine = new OrderMachine();
         eventMachine = new EventMachine();
     }
@@ -40,7 +43,7 @@ public class Controller {
         output.notifyGetMenu();
         output.notifyPreview(date);
         makeOrderBoard();
-        orderMachine.totalCountValidation(countAllOrderMenu(orderMachine.getOrderBoard()));
+        orderMachine.totalCountValidation();
         callOutputForPrintOrderMenu(orderMachine.getOrderBoard());
         orderMachine.calculateTotalPayment();
         output.notifyPayment(orderMachine.getTotalPaymentAmount());
@@ -74,7 +77,7 @@ public class Controller {
 
     private void checkEventValidation(int totalPrice) {
         if (totalPrice >= EVENT_APPLICATION_CRITERIA) {
-            eventMachine.getEventStatus(date);
+            eventMachine.getEventStatus(date, orderMachine.);
         }
     }
 
@@ -106,14 +109,6 @@ public class Controller {
                 || date > Calendar.DECEMBER_LAST.getDate()) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_DATE_ERROR);
         }
-    }
-
-    private int countAllOrderMenu(List<Order> orderBoard) {
-        int totalCount = 0;
-        for (Order order : orderBoard) {
-            totalCount += order.getOrderCount();
-        }
-        return totalCount;
     }
 
     private int calculateAmountOfPayment() {
