@@ -33,14 +33,14 @@ public class Controller {
         eventMachine = new EventMachine();
     }
 
-    public void christmasPlannerStart() {
+    public void startChristmasPlanner() {
         output.notifyExplanation();
         output.notifyVisitDate();
         date = input.getVisitDate();
         inputValueValidation(date);
     }
 
-    public void getMenuStart() {
+    public void getOrderMenu() {
         output.notifyGetMenu();
         output.notifyPreview(date);
         makeOrderBoard();
@@ -71,18 +71,23 @@ public class Controller {
         }
     }
 
-    private void checkInputMenuOnlyBeverage(HashMap<String, Integer> inputOrderMenu) {
-        List<String> inputOrderMenuName = new ArrayList<>(inputOrderMenu.keySet());
-        List<String> beverageInOrder = new ArrayList<>();
-        for (String name : inputOrderMenuName) {
-            if (!menuMachine.checkBeverageMenuInOrderMenu(name).isEmpty()) {
-                beverageInOrder.add(menuMachine.checkBeverageMenuInOrderMenu(name));
-            }
-        }
-        if (beverageInOrder.size() == inputOrderMenuName.size()) {
+    public void callOnlyBeverageException(int beverageInOrderCount, int inputOrderMenuCount) {
+        if (beverageInOrderCount == inputOrderMenuCount) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }
+
+    private void checkInputMenuOnlyBeverage(HashMap<String, Integer> inputOrderMenu) {
+        List<String> beverageInOrder = new ArrayList<>();
+        for (String name : inputOrderMenu.keySet()) {
+            String beverage = menuMachine.checkBeverageMenuInOrderMenu(name);
+            if (!beverage.isEmpty()) {
+                beverageInOrder.add(beverage);
+            }
+        }
+        callOnlyBeverageException(beverageInOrder.size(), inputOrderMenu.size());
+    }
+
 
     private void callOutputForPrintOrderMenu(List<Order> orderBoard) {
         output.printOrderMenuTitle();
@@ -135,7 +140,7 @@ public class Controller {
         }
     }
 
-    public void inputValueValidation(int date) {
+    private void inputValueValidation(int date) {
         if (date < Calendar.DECEMBER_FIRST.getDate()
                 || date > Calendar.DECEMBER_LAST.getDate()) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_DATE_ERROR);

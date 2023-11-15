@@ -4,8 +4,8 @@ public class Application {
     public static void main(String[] args) {
         Controller controller = new Controller();
         try {
-            controller.christmasPlannerStart();
-            controller.getMenuStart();
+            controller.startChristmasPlanner();
+            controller.getOrderMenu();
             controller.getEventDetail();
             controller.getBadge();
         }catch (Exception e) {
