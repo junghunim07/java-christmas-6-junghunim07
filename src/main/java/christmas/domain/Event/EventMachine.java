@@ -1,6 +1,5 @@
 package christmas.domain.Event;
 
-import christmas.domain.Order.OrderMachine;
 import java.util.ArrayList;
 import java.util.List;
 
