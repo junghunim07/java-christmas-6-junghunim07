@@ -1,5 +1,7 @@
 package christmas.domain.Order;
 
+import christmas.domain.Menu.Menu;
+import christmas.domain.Menu.MenuMachine;
 import christmas.ui.OutputView;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +18,23 @@ public class OrderMachine {
     }
 
     public void addOrderMenu(String name, int count) {
-        orderMenuInMenuBoardValidation();
-        orderMenuDuplicateValidation(name);
+        orderMenuInMenuBoardValidation(name);
+        orderMenuDuplicateValidation();
         OrderBoard.add(new Order(name, count));
     }
 
-    private void orderMenuInMenuBoardValidation() {
-        List<Order> distinctList = OrderBoard.stream().distinct().toList();
-        if (OrderBoard.size() != distinctList.size()) {
-            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
+    private void orderMenuInMenuBoardValidation(String name) {
+        for (Menu menu : MenuMachine.MenuBoard) {
+            if (!menu.getName().equals(name)) {
+                throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
+            }
         }
     }
 
-    private void orderMenuDuplicateValidation(String name) {
-        for (int i = 0; i < OrderBoard.size(); i++) {
-            if (OrderBoard.get(i).getOrderMenuName().equals(name)) {
-                throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
-            }
+    private void orderMenuDuplicateValidation() {
+        List<Order> distinctList = OrderBoard.stream().distinct().toList();
+        if (OrderBoard.size() != distinctList.size()) {
+            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }
 
