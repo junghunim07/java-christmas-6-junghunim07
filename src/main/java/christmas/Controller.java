@@ -107,20 +107,30 @@ public class Controller {
             output.notifyGiftMenu(OutputView.NOTHING);
         }
         if (giftEvent.getDiscount() > 0) {
-            output.notifyGiftMenu(Beverage.CHAMPAGNE.getName() + OutputView.SPACE + "1" + OutputView.COUNT);
+            output.notifyGiftMenu(giftEvent.getGiftMenuName() + OutputView.SPACE + "1" + OutputView.COUNT);
         }
     }
 
     private void callOutputForEventDetail() {
         if (eventMachine.getTotalDiscount() == 0) {
-            output.printBenefitDetailTitle();
-            output.notifyNotBenefit(OutputView.NOTHING);
+            hasNotEvent();
         }
         if (eventMachine.getTotalDiscount() != 0) {
-            output.printBenefitDetailTitle();
-            for (Event event : eventMachine.getEventTable()) {
-                output.notifyBenefitDetail(event.getEventName(), event.getDiscount());
-            }
+            hasEvent();
+        }
+    }
+
+    private void hasNotEvent() {
+        output.printBenefitDetailTitle();
+        output.notifyNotBenefit(OutputView.NOTHING);
+    }
+
+    private void hasEvent() {
+        output.printBenefitDetailTitle();
+        for (Event event : eventMachine.getEventTable()) {
+            output.notifyBenefitDetail(event.getEventName(), event.getDiscount());
+        }
+        if (giftEvent.getDiscount() != 0) {
             output.notifyBenefitDetail(giftEvent.getEventName(), giftEvent.getDiscount());
         }
     }
