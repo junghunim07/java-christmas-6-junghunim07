@@ -27,5 +27,14 @@ public enum Beverage {
         return price;
     }
 
+    public static boolean hasSameMenu(String name) {
+        for (Beverage beverage : Beverage.values()) {
+            if (beverage.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public abstract String getName();
 }

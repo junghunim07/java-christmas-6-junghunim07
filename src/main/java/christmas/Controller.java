@@ -72,17 +72,14 @@ public class Controller {
     }
 
     private void checkInputMenuOnlyBeverage(HashMap<String, Integer> inputOrderMenu) {
-        List<String> inputOrderName = new ArrayList<>();
-        for (String key : inputOrderMenu.keySet()) {
-            inputOrderName.add(key);
-        }
+        List<String> inputOrderMenuName = new ArrayList<>(inputOrderMenu.keySet());
         List<String> beverageInOrder = new ArrayList<>();
-        for (String name : inputOrderName) {
-            if (name.equals(Beverage.RED_WINE.getName()) || name.equals(Beverage.ZERO_COLA.getName()) || name.equals(Beverage.CHAMPAGNE.getName())) {
-                beverageInOrder.add(name);
+        for (String name : inputOrderMenuName) {
+            if (!menuMachine.checkBeverageMenuInOrderMenu(name).isEmpty()) {
+                beverageInOrder.add(menuMachine.checkBeverageMenuInOrderMenu(name));
             }
         }
-        if (beverageInOrder.size() == inputOrderMenu.size()) {
+        if (beverageInOrder.size() == inputOrderMenuName.size()) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }

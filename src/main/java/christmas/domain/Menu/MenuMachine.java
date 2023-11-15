@@ -37,4 +37,12 @@ public class MenuMachine {
             MenuBoard.add(new Menu(beverage.getName(), beverage.getPrice()));
         }
     }
+
+    public String checkBeverageMenuInOrderMenu(String name) {
+        String beverageMenu = "";
+        if (Beverage.hasSameMenu(name)) {
+            beverageMenu = name;
+        }
+        return beverageMenu;
+    }
 }
