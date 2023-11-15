@@ -65,4 +65,8 @@ public class Order {
         }
         return false;
     }
+
+    public boolean checkDuplicationOrder(Order order) {
+        return this.orderMenuName.equals(order.getOrderMenuName());
+    }
 }

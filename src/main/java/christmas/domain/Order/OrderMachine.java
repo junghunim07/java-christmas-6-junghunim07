@@ -18,8 +18,9 @@ public class OrderMachine {
 
     public void addOrderMenu(String name, int count) {
         orderMenuInMenuBoardValidation(name);
-        orderMenuDuplicateValidation();
-        OrderBoard.add(new Order(name, count));
+        Order newOrder = new Order(name, count);
+        orderMenuDuplicateValidation(newOrder);
+        OrderBoard.add(newOrder);
     }
 
     private void orderMenuInMenuBoardValidation(String name) {
@@ -34,10 +35,11 @@ public class OrderMachine {
         }
     }
 
-    private void orderMenuDuplicateValidation() {
-        List<Order> distinctList = OrderBoard.stream().distinct().toList();
-        if (OrderBoard.size() != distinctList.size()) {
-            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
+    private void orderMenuDuplicateValidation(Order newOrder) {
+        for (Order order : OrderBoard) {
+            if (order.checkDuplicationOrder(newOrder)) {
+                throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
+            }
         }
     }
 
