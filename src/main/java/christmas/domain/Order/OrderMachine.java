@@ -10,7 +10,6 @@ public class OrderMachine {
     private static final int MAXIMUM_ORDER_COUNT = 20;
     private final List<Order> OrderBoard;
     private int TotalPaymentAmount = 0;
-
     private int OrderMenuCount = 0;
 
     public OrderMachine() {
@@ -24,10 +23,14 @@ public class OrderMachine {
     }
 
     private void orderMenuInMenuBoardValidation(String name) {
+        boolean orderMenuInMenuBoard = false;
         for (Menu menu : MenuMachine.MenuBoard) {
-            if (!menu.getName().equals(name)) {
-                throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
+            if (menu.getName().equals(name)) {
+                orderMenuInMenuBoard = true;
             }
+        }
+        if (!orderMenuInMenuBoard) {
+            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }
 
