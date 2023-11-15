@@ -16,19 +16,19 @@ public class OrderMachine {
     }
 
     public void addOrderMenu(String name, int count) {
-        menuValidation();
-        menuDuplicateValidation(name);
+        orderMenuInMenuBoardValidation();
+        orderMenuDuplicateValidation(name);
         OrderBoard.add(new Order(name, count));
     }
 
-    private void menuValidation() {
+    private void orderMenuInMenuBoardValidation() {
         List<Order> distinctList = OrderBoard.stream().distinct().toList();
         if (OrderBoard.size() != distinctList.size()) {
             throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }
 
-    private void menuDuplicateValidation(String name) {
+    private void orderMenuDuplicateValidation(String name) {
         for (int i = 0; i < OrderBoard.size(); i++) {
             if (OrderBoard.get(i).getOrderMenuName().equals(name)) {
                 throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);

@@ -11,6 +11,7 @@ import christmas.domain.Order.Order;
 import christmas.domain.Order.OrderMachine;
 import christmas.ui.InputView;
 import christmas.ui.OutputView;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -64,8 +65,25 @@ public class Controller {
 
     private void makeOrderBoard() {
         HashMap<String, Integer> menus = input.getMenu();
+        checkInputMenuOnlyBeverage(menus);
         for (String key : menus.keySet()) {
             orderMachine.addOrderMenu(key, menus.get(key));
+        }
+    }
+
+    private void checkInputMenuOnlyBeverage(HashMap<String, Integer> inputOrderMenu) {
+        List<String> inputOrderName = new ArrayList<>();
+        for (String key : inputOrderMenu.keySet()) {
+            inputOrderName.add(key);
+        }
+        List<String> beverageInOrder = new ArrayList<>();
+        for (String name : inputOrderName) {
+            if (name.equals(Beverage.RED_WINE.getName()) || name.equals(Beverage.ZERO_COLA.getName()) || name.equals(Beverage.CHAMPAGNE.getName())) {
+                beverageInOrder.add(name);
+            }
+        }
+        if (beverageInOrder.size() == inputOrderMenu.size()) {
+            throw new IllegalArgumentException(OutputView.NOTIFY_INVALID_ORDER_ERROR);
         }
     }
 
@@ -85,13 +103,6 @@ public class Controller {
                 eventMachine.getEventStatus(date, orderMachine.getOrderDessertMenuCount());
             }
         }
-    }
-
-    private int decideOrderMachineAboutDessertCountOrMainCount(int date) {
-        if (Calendar.checkWeekdayOrWeekend(date)) {
-            return orderMachine.getOrderMainMenuCount();
-        }
-        return orderMachine.getOrderDessertMenuCount();
     }
 
     private void callOutputAboutGiftEvent() {
