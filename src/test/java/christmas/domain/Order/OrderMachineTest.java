@@ -21,7 +21,7 @@ class OrderMachineTest {
     @DisplayName("메뉴판에 없는 메뉴를 주문했을 때 예외 테스트")
     @Test
     void addOrderMenu() {
-        assertThatThrownBy(() -> orderMachine.addOrderMenu("딸기케이크", 1))
+        assertThatThrownBy(() -> orderMachine.addOrderMenuToOrderBoard("딸기케이크", 1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -31,9 +31,9 @@ class OrderMachineTest {
         List<Order> orderMenu = List.of(new Order("초코케이크", 1),
                 new Order("해산물파스타", 1));
         for (Order order : orderMenu) {
-            orderMachine.addOrderMenu(order.getOrderMenuName(), order.getOrderCount());
+            orderMachine.addOrderMenuToOrderBoard(order.getOrderMenuName(), order.getOrderCount());
         }
-        assertThatThrownBy(() -> orderMachine.addOrderMenu("초코케이크", 1))
+        assertThatThrownBy(() -> orderMachine.addOrderMenuToOrderBoard("초코케이크", 1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

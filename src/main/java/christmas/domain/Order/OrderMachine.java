@@ -16,10 +16,11 @@ public class OrderMachine {
         OrderBoard = new ArrayList<>();
     }
 
-    public void addOrderMenu(String name, int count) {
+    public void addOrderMenuToOrderBoard(String name, int count) {
         orderMenuInMenuBoardValidation(name);
         Order newOrder = new Order(name, count);
         orderMenuDuplicateValidation(newOrder);
+        calculateTotalPayment(newOrder);
         OrderBoard.add(newOrder);
     }
 
@@ -43,14 +44,14 @@ public class OrderMachine {
         }
     }
 
-    public int getOrderDessertMenuCount() {
+    public int countDessertMenuInOrderBoard() {
         for (Order order : OrderBoard) {
             OrderMenuCount += order.getDessertCount();
         }
         return OrderMenuCount;
     }
 
-    public int getOrderMainMenuCount() {
+    public int countMainMenuInOrderBoard() {
         for (Order order : OrderBoard) {
             OrderMenuCount += order.getMainCount();
         }
@@ -71,11 +72,8 @@ public class OrderMachine {
         }
     }
 
-    public int calculateTotalPayment() {
-        for (Order order : OrderBoard) {
-            TotalPaymentAmount += Order.getPayment(order);
-        }
-        return TotalPaymentAmount;
+    private void calculateTotalPayment(Order order) {
+        TotalPaymentAmount += Order.getPayment(order);
     }
 
     public int getTotalPaymentAmount() {

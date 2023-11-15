@@ -46,7 +46,6 @@ public class Controller {
         output.notifyPreview(date);
         orderMachine.totalCountValidation(orderMachine.countTotalOrderMenu());
         callOutputForPrintOrderMenu(orderMachine.getOrderBoard());
-        orderMachine.calculateTotalPayment();
         output.notifyPayment(orderMachine.getTotalPaymentAmount());
     }
 
@@ -67,7 +66,7 @@ public class Controller {
         HashMap<String, Integer> menus = input.getMenu();
         checkInputMenuOnlyBeverage(menus);
         for (String key : menus.keySet()) {
-            orderMachine.addOrderMenu(key, menus.get(key));
+            orderMachine.addOrderMenuToOrderBoard(key, menus.get(key));
         }
     }
 
@@ -100,10 +99,10 @@ public class Controller {
     private void checkEventValidation(int totalPrice) {
         if (totalPrice >= EVENT_APPLICATION_CRITERIA) {
             if (Calendar.checkWeekdayOrWeekend(date)) {
-                eventMachine.getEventStatus(date, orderMachine.getOrderMainMenuCount());
+                eventMachine.getEventStatus(date, orderMachine.countMainMenuInOrderBoard());
             }
             if (!Calendar.checkWeekdayOrWeekend(date)) {
-                eventMachine.getEventStatus(date, orderMachine.getOrderDessertMenuCount());
+                eventMachine.getEventStatus(date, orderMachine.countDessertMenuInOrderBoard());
             }
         }
     }
