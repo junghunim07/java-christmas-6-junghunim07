@@ -42,8 +42,8 @@ public class Controller {
 
     public void getOrderMenu() {
         output.notifyGetMenu();
-        output.notifyPreview(date);
         makeOrderBoard();
+        output.notifyPreview(date);
         orderMachine.totalCountValidation(orderMachine.countTotalOrderMenu());
         callOutputForPrintOrderMenu(orderMachine.getOrderBoard());
         orderMachine.calculateTotalPayment();
@@ -94,6 +94,7 @@ public class Controller {
         for (Order order : orderBoard) {
             output.notifyOrderMenu(order.getOrderMenuName(), order.getOrderCount());
         }
+        output.printNewLineForOutputFormat();
     }
 
     private void checkEventValidation(int totalPrice) {
@@ -138,6 +139,7 @@ public class Controller {
         if (giftEvent.getDiscount() != 0) {
             output.notifyBenefitDetail(giftEvent.getEventName(), giftEvent.getDiscount());
         }
+        output.printNewLineForOutputFormat();
     }
 
     private void inputValueValidation(int date) {

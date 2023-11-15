@@ -26,6 +26,10 @@ public class OutputView {
     public static final String NOTIFY_INVALID_DATE_ERROR = ERROR + SPACE + "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     public static final String NOTIFY_INVALID_ORDER_ERROR = ERROR + SPACE +"유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
+    public void printNewLineForOutputFormat() {
+        System.out.print(NEW_LINE);
+    }
+
     public void notifyExplanation() {
         System.out.println(INTRO_EXPLANATION);
     }
@@ -64,7 +68,6 @@ public class OutputView {
 
     public void notifyBenefitDetail(String eventName, int discount) {
         System.out.println(eventName + " : " + MINUS + discount + WON);
-        System.out.print(NEW_LINE);
     }
 
     public void notifyNotBenefit(String event) {
